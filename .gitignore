@@ -1,0 +1,39 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Env / secrets
+.env
+.env.*
+*.pem
+credentials.json
+secrets/
+
+# Node / build (for future website/app)
+node_modules/
+dist/
+build/
+.next/
+*.log
+
+# Python (for future connectors/agents)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local notes not meant for the repo
+scratch/
+*.local.md
+
+# Sensitive: never commit real client data, signed contracts, or financials
+product/clients/
+legal/signed/
+legal/**/*executed*
+finance/*.private.*
+**/*client-data*

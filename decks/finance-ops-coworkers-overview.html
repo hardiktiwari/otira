@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Coworkers for NTL — A Conversation</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg-2: #0f1525;
+    --card: #151b2e;
+    --card-2: #1a2238;
+    --ink: #eef2fb;
+    --muted: #97a3c2;
+    --line: #283150;
+    --accent: #6c8cff;
+    --accent-2: #7af0d0;
+    --wine: #b5476b;
+    --accent-grad: linear-gradient(120deg, #6c8cff 0%, #9d7bff 50%, #7af0d0 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .slide {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 7vh 8vw;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(108,140,255,0.12), transparent 60%),
+      radial-gradient(700px 500px at 0% 110%, rgba(181,71,107,0.10), transparent 55%),
+      var(--bg);
+  }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent-2); margin-bottom: 22px;
+  }
+  .kicker .num {
+    width: 30px; height: 30px; border-radius: 9px;
+    display: grid; place-items: center;
+    background: rgba(108,140,255,0.14); border: 1px solid var(--line);
+    color: var(--accent); font-size: 13px;
+  }
+  h1 {
+    font-size: clamp(32px, 4.6vw, 56px); line-height: 1.06; letter-spacing: -0.02em;
+    font-weight: 800; margin-bottom: 18px; max-width: 18ch;
+  }
+  h1 .grad {
+    background: var(--accent-grad); -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lede { font-size: clamp(16px, 1.9vw, 20px); color: var(--muted); max-width: 64ch; margin-bottom: 34px; }
+  .tagline {
+    font-size: clamp(15px, 1.6vw, 18px); color: var(--ink); font-weight: 600;
+    border-left: 3px solid var(--accent); padding-left: 16px; margin-top: 8px; max-width: 64ch;
+  }
+
+  .grid { display: grid; gap: 18px; }
+  .g-steps { grid-template-columns: repeat(5, 1fr); }
+  .g-3 { grid-template-columns: repeat(3, 1fr); }
+  .g-2 { grid-template-columns: 1.1fr 0.9fr; }
+
+  .card {
+    background: linear-gradient(180deg, var(--card) 0%, var(--card-2) 100%);
+    border: 1px solid var(--line); border-radius: 16px; padding: 22px 20px;
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .card .icon { font-size: 22px; margin-bottom: 12px; display: block; }
+  .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 7px; letter-spacing: -0.01em; }
+  .card p { font-size: 14px; color: var(--muted); }
+  .step-tag { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .08em; }
+
+  .pill {
+    display: inline-block; font-size: 13px; color: var(--muted);
+    background: rgba(255,255,255,0.03); border: 1px solid var(--line);
+    border-radius: 999px; padding: 7px 14px; margin: 4px 6px 4px 0;
+  }
+  .pill b { color: var(--ink); font-weight: 600; }
+
+  .qcard {
+    background: linear-gradient(180deg, var(--card) 0%, var(--card-2) 100%);
+    border: 1px solid var(--line); border-radius: 16px; padding: 20px;
+  }
+  .qcard .qhead { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .qcard .qhead .badge { font-size: 19px; }
+  .qcard .qhead h3 { font-size: 15px; font-weight: 700; letter-spacing: .01em; }
+  .qlist { list-style: none; }
+  .qlist li { position: relative; padding-left: 20px; margin-bottom: 11px; font-size: 14px; color: var(--ink); }
+  .qlist li::before { content: "?"; position: absolute; left: 0; top: 0; color: var(--accent-2); font-weight: 800; }
+  .qlist li.ask::before { content: "→"; color: var(--wine); }
+
+  .list { list-style: none; }
+  .list li { position: relative; padding-left: 26px; margin-bottom: 12px; font-size: 15px; color: var(--ink); }
+  .list li::before {
+    content: ""; position: absolute; left: 0; top: 8px; width: 9px; height: 9px;
+    border-radius: 50%; background: var(--accent-grad);
+  }
+  .list li span { color: var(--muted); }
+
+  .section-label { font-size: 13px; font-weight: 700; color: var(--accent-2); text-transform: uppercase; letter-spacing: .1em; margin: 0 0 14px; }
+
+  .flow { display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; margin-bottom: 8px; }
+  .flow .node {
+    flex: 1; min-width: 120px; background: rgba(255,255,255,0.03); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 12px; text-align: center; font-size: 13px; color: var(--ink); font-weight: 600;
+  }
+  .flow .arrow { display: grid; place-items: center; padding: 0 8px; color: var(--accent); font-size: 18px; }
+  .flow .node small { display:block; color: var(--muted); font-weight: 400; margin-top: 4px; font-size: 11px; }
+
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent-grad); width: 0; z-index: 50; transition: width .15s ease; }
+  .dots { position: fixed; right: 26px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 40; }
+  .dots a { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: block; transition: all .2s; }
+  .dots a:hover { background: var(--accent); transform: scale(1.25); }
+  .foot { position: absolute; bottom: 26px; left: 8vw; right: 8vw; display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+  .foot .brand { font-weight: 700; color: var(--ink); letter-spacing: .02em; }
+
+  @media (max-width: 900px) {
+    .g-steps, .g-3 { grid-template-columns: 1fr 1fr; }
+    .g-2 { grid-template-columns: 1fr; }
+    .dots { display: none; }
+  }
+  @media (max-width: 520px) {
+    .g-steps, .g-3 { grid-template-columns: 1fr; }
+  }
+  @media print {
+    html { scroll-snap-type: none; }
+    .slide { min-height: auto; page-break-after: always; border: none; }
+    .dots, .progress { display: none; }
+    body { background: #fff; color: #111; }
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<nav class="dots">
+  <a href="#s1" title="What we're thinking"></a>
+  <a href="#s2" title="What we could build for NTL"></a>
+  <a href="#s3" title="Questions for you"></a>
+</nav>
+
+<!-- SLIDE 1 -->
+<section class="slide" id="s1">
+  <div class="kicker"><span class="num">01</span> What we're thinking</div>
+  <h1>An AI <span class="grad">coworker</span> that learns your business and runs the work your team hates.</h1>
+  <p class="lede">
+    We're not pitching another ERP to rip-and-replace Traverse and Echo. We come in, learn how
+    NTL really operates, wire AI into the systems you already use, teach it your business — the
+    three-tier rules, your pricing, your SKUs — and build automations that do the repetitive work
+    alongside your team. When we're done, you own it.
+  </p>
+
+  <div class="grid g-steps">
+    <div class="card">
+      <span class="step-tag">STEP 1</span>
+      <h3 style="margin-top:8px;">Embed &amp; Map</h3>
+      <p>Learn your landscape — team, tools, and how an order really moves.</p>
+    </div>
+    <div class="card">
+      <span class="step-tag">STEP 2</span>
+      <h3 style="margin-top:8px;">Connect</h3>
+      <p>Build connectors into Traverse, VIP, email — no migration.</p>
+    </div>
+    <div class="card">
+      <span class="step-tag">STEP 3</span>
+      <h3 style="margin-top:8px;">Contextualize</h3>
+      <p>Encode your pricing rules, SKUs &amp; compliance into a "company brain."</p>
+    </div>
+    <div class="card">
+      <span class="step-tag">STEP 4</span>
+      <h3 style="margin-top:8px;">Automate</h3>
+      <p>Build coworkers on top — starting with your biggest daily pain.</p>
+    </div>
+    <div class="card" style="border-color:var(--accent);">
+      <span class="step-tag" style="color:var(--accent-2)">HANDOFF</span>
+      <h3 style="margin-top:8px;">You own it</h3>
+      <p>Your team can extend the automations after we leave.</p>
+    </div>
+  </div>
+
+  <p class="tagline">"We don't replace your systems. We give them a brain — and then we hand you the keys."</p>
+
+  <div class="foot">
+    <span class="brand">For NTL · Third Leaf Wines</span>
+    <span>A working conversation · Confidential</span>
+  </div>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide" id="s2">
+  <div class="kicker"><span class="num">02</span> What we could build for you</div>
+  <h1>Start with the <span class="grad">email-to-order</span> coworker.</h1>
+  <p class="lede">
+    A known distributor emails a PDF with six products. Today someone keys it in by hand.
+    Imagine it handled automatically — and a clean draft order waiting for a human to approve.
+  </p>
+
+  <div class="flow">
+    <div class="node">PDF arrives<small>known distributor</small></div>
+    <div class="arrow">→</div>
+    <div class="node">Read &amp; match<small>to your SKUs &amp; customer</small></div>
+    <div class="arrow">→</div>
+    <div class="node">Verify<small>pricing rules + inventory</small></div>
+    <div class="arrow">→</div>
+    <div class="node">Draft order<small>human approves</small></div>
+  </div>
+
+  <div class="grid g-2" style="margin-top:24px;">
+    <div>
+      <p class="section-label">…then expand to the rest</p>
+      <div>
+        <span class="pill"><b>Pricing checks</b> — state / distributor / program</span>
+        <span class="pill"><b>Inventory</b> across warehouses</span>
+        <span class="pill"><b>VIP depletion</b> ingest &amp; name-matching</span>
+        <span class="pill"><b>PO tracking</b> — multi-currency, landed cost</span>
+        <span class="pill"><b>AR / collections</b> follow-up</span>
+        <span class="pill"><b>Reporting</b> by rep / brand / state</span>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">Why this approach</p>
+      <ul class="list">
+        <li><b>No migration</b> — <span>works on top of Traverse, VIP &amp; your React app.</span></li>
+        <li><b>Knows your business</b> — <span>your pricing stack, not a generic template.</span></li>
+        <li><b>Prove it in weeks</b> — <span>one workflow, a clear win, then grow.</span></li>
+        <li><b>You keep the keys</b> — <span>a capability, not a dependency.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="brand">For NTL · Third Leaf Wines</span>
+    <span>What we could build</span>
+  </div>
+</section>
+
+<!-- SLIDE 3 -->
+<section class="slide" id="s3">
+  <div class="kicker"><span class="num">03</span> Questions for you, Cameron</div>
+  <h1>Help us find the <span class="grad">highest-pain</span> workflow to start with.</h1>
+  <p class="lede">
+    This first conversation is about how NTL actually runs day to day — so we pick the one
+    automation that saves you the most, fastest. Here's what we'd love to dig into.
+  </p>
+
+  <div class="grid g-3">
+    <div class="qcard">
+      <div class="qhead"><span class="badge">📥</span><h3>The order workflow</h3></div>
+      <ul class="qlist">
+        <li>Walk us through the last order that came in by email — step by step.</li>
+        <li>How often does this happen, and how many person-hours does it eat?</li>
+        <li>When it goes wrong, what does that cost you?</li>
+        <li>What counts as a "match" for a product and a customer — how messy are the names?</li>
+      </ul>
+    </div>
+    <div class="qcard">
+      <div class="qhead"><span class="badge">🔌</span><h3>Systems &amp; data</h3></div>
+      <ul class="qlist">
+        <li>Is there an API into Traverse, or is CSV export the only way in and out?</li>
+        <li>How do the VIP depletion files come in, and where does the mapping break?</li>
+        <li>Should this live inside Echo, or a new portal?</li>
+        <li class="ask">Can we get sample order emails + Traverse/VIP exports (redacted)?</li>
+      </ul>
+    </div>
+    <div class="qcard">
+      <div class="qhead"><span class="badge">🎯</span><h3>People &amp; success</h3></div>
+      <ul class="qlist">
+        <li>Who needs to see vs. approve vs. configure? (your six roles)</li>
+        <li>Who else touches this — bookkeeper, CPA, ops lead?</li>
+        <li>If this worked perfectly, what's the next workflow you'd automate?</li>
+        <li>What does "success in 90 days" look like to you?</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="tagline" style="margin-top:28px;">
+    Our proposed next step: a short, fixed-scope discovery sprint that ends with a working
+    email-to-order prototype on your real data.
+  </p>
+
+  <div class="foot">
+    <span class="brand">For NTL · Third Leaf Wines</span>
+    <span>Questions for you</span>
+  </div>
+</section>
+
+<script>
+  const bar = document.getElementById('progress');
+  function update() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  document.addEventListener('scroll', update, { passive: true });
+  update();
+</script>
+</body>
+</html>

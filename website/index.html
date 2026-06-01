@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Otira — AI coworkers for small businesses</title>
+<meta name="description" content="Otira sets up an AI assistant that plugs into the tools you already use, learns how your business runs, and does the repetitive work — so you get your time back." />
+<style>
+  :root{
+    --bg:#0a0e1a; --bg2:#0f1525; --card:#151b2e; --card2:#1a2238;
+    --ink:#eef2fb; --muted:#97a3c2; --line:#283150;
+    --accent:#6c8cff; --accent2:#7af0d0;
+    --grad:linear-gradient(120deg,#6c8cff,#9d7bff 50%,#7af0d0);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);background:rgba(10,14,26,.7);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:800;letter-spacing:-.02em;font-size:20px}
+  .logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .nav a.cta{background:var(--grad);color:#0a0e1a;font-weight:700;padding:9px 16px;border-radius:10px;font-size:14px}
+  .nav .links{display:flex;gap:22px;align-items:center;font-size:14px;color:var(--muted)}
+  .nav .links a:hover{color:var(--ink)}
+  section{padding:84px 0;border-bottom:1px solid var(--line)}
+  .hero{padding:96px 0 88px;background:radial-gradient(800px 460px at 80% -10%,rgba(108,140,255,.15),transparent 60%),radial-gradient(700px 460px at 0% 110%,rgba(122,240,208,.08),transparent 55%)}
+  h1{font-size:clamp(36px,5.5vw,64px);line-height:1.05;letter-spacing:-.025em;font-weight:800;max-width:17ch}
+  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:60ch;margin:22px 0 34px}
+  .btn{display:inline-block;background:var(--grad);color:#0a0e1a;font-weight:700;padding:14px 26px;border-radius:12px;font-size:16px}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);margin-left:10px}
+  h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.02em;font-weight:800;margin-bottom:14px}
+  .lead{color:var(--muted);max-width:60ch;margin-bottom:40px;font-size:17px}
+  .grid{display:grid;gap:18px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:24px}
+  .card .n{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.08em}
+  .card h3{font-size:17px;margin:10px 0 8px;font-weight:700}
+  .card p{color:var(--muted);font-size:15px}
+  .check li{list-style:none;padding-left:28px;position:relative;margin-bottom:14px;font-size:16px}
+  .check li::before{content:"✓";position:absolute;left:0;color:var(--accent2);font-weight:800}
+  .x li{list-style:none;padding-left:28px;position:relative;margin-bottom:12px;color:var(--muted)}
+  .x li::before{content:"✕";position:absolute;left:0;color:#e0708a;font-weight:800}
+  details{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;background:rgba(255,255,255,.02)}
+  summary{cursor:pointer;font-weight:600;font-size:16px}
+  details p{color:var(--muted);margin-top:10px}
+  .cta-band{text-align:center;background:radial-gradient(700px 300px at 50% 0%,rgba(108,140,255,.14),transparent 60%)}
+  footer{padding:40px 0;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .tag{display:inline-block;font-size:13px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:999px;padding:7px 14px;margin:4px 6px 4px 0}
+  @media(max-width:820px){.g3,.g2{grid-template-columns:1fr}.nav .links{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo"><b>Otira</b></div>
+  <div class="links">
+    <a href="#how">How it works</a>
+    <a href="#uses">Use cases</a>
+    <a href="#trust">Trust</a>
+    <a href="#faq">FAQ</a>
+    <a class="cta" href="#book">Book a call</a>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <h1>Get your <span class="g">time back.</span> Let an AI coworker run the busywork.</h1>
+  <p class="sub">  Otira plugs into the tools you already use — your email, accounting, and inventory
+  software — learns how your business actually runs, and does the slow, repetitive work for you.
+  You review and approve. No new system to learn.</p>
+  <a class="btn" href="#book">Book a call</a>
+  <a class="btn ghost" href="#how">See how it works</a>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2>How it works</h2>
+  <p class="lead">We set it up around you in a few weeks, prove it on your real data, then hand
+  you the keys. You stay in control the whole way.</p>
+  <div class="grid g3">
+    <div class="card"><div class="n">01</div><h3>We learn your business</h3><p>We sit with you and map how work really flows — your products, customers, pricing, and rules.</p></div>
+    <div class="card"><div class="n">02</div><h3>We connect your tools</h3><p>Email, accounting, inventory — Otira works on top of what you already have. Nothing to migrate.</p></div>
+    <div class="card"><div class="n">03</div><h3>It does the work</h3><p>Otira handles the repetitive tasks and shows you a result to approve. It tells you how sure it is and logs everything.</p></div>
+  </div>
+</div></section>
+
+<section id="uses"><div class="wrap">
+  <h2>What it can do</h2>
+  <p class="lead">Start with the one task costing you the most. Expand from there.</p>
+  <div class="grid g2">
+    <div class="card"><h3>Turn emails into orders</h3><p>A customer emails an order → Otira reads it, matches products and pricing, checks stock, and prepares the order for your approval.</p></div>
+    <div class="card"><h3>Handle invoices</h3><p>Vendor invoices get filed correctly and queued for payment with your okay — no more manual data entry.</p></div>
+    <div class="card"><h3>Keep inventory on track</h3><p>Reorder suggestions and purchase orders, with stock and costs tracked across locations.</p></div>
+    <div class="card"><h3>Watch the numbers</h3><p>Live dashboards plus alerts when something looks off — before it becomes a problem.</p></div>
+  </div>
+</div></section>
+
+<section id="trust"><div class="wrap">
+  <h2>Built so you can trust it</h2>
+  <p class="lead">Otira is a coworker, not a black box. You're always in control.</p>
+  <div class="grid g2">
+    <div><ul class="check">
+      <li>It tells you how confident it is on every task</li>
+      <li>It asks for approval before anything important</li>
+      <li>Every action is logged — see exactly what it did and why</li>
+      <li>Your data stays in your systems</li>
+    </ul></div>
+    <div class="card">
+      <h3>Why not just use ChatGPT?</h3>
+      <ul class="x" style="margin-top:12px">
+        <li>It isn't connected to your live systems</li>
+        <li>It doesn't know your business's rules</li>
+        <li>It can't take real actions for you</li>
+        <li>It can't show where every answer came from</li>
+      </ul>
+      <p style="color:var(--ink);margin-top:6px"><b>Otira does all four.</b></p>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <h2>Questions</h2>
+  <details><summary>Do I have to switch software?</summary><p>No. Otira works on top of the tools you already use. There's nothing to migrate.</p></details>
+  <details><summary>What if my data is messy?</summary><p>That's normal — and fine. Your data doesn't need to be clean to start; it just needs to exist. We work with what you have.</p></details>
+  <details><summary>Will it make mistakes with my money?</summary><p>You approve anything that matters, and every action is logged. We never move money automatically without your sign-off.</p></details>
+  <details><summary>How long until it's working?</summary><p>We start with one workflow and aim to have it working on your real data within a few weeks.</p></details>
+  <details><summary>What does it cost?</summary><p>Far less than a hire — we price against the work and the hours it saves you. We'll walk through it on a call.</p></details>
+</div></section>
+
+<section id="book" class="cta-band"><div class="wrap">
+  <h2>See what Otira could do for your business</h2>
+  <p class="lead" style="margin:0 auto 28px">A short call to find the one workflow where Otira saves you the most — and get your time back.</p>
+  <a class="btn" href="mailto:hello@otira.example?subject=Otira%20intro%20call">Book a call</a>
+</div></section>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;width:100%">
+  <span class="logo"><b>Otira</b></span>
+  <span>AI coworkers for small businesses · © 2026 Otira (working name)</span>
+</div></footer>
+</body>
+</html>
