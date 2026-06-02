@@ -1,6 +1,6 @@
 # Website
 
-The marketing / pitch site for Otira (provisional name). This is an **artifact (a codebase)**, not a skill — the
+The marketing / pitch site for Otira. This is an **artifact (a codebase)**, not a skill — the
 *how-to* lives in [`../skills/dev`](../skills/dev/SKILL.md) and [`../skills/ppt`](../skills/ppt/SKILL.md);
 the *site itself* lives here.
 
@@ -25,7 +25,7 @@ or deploy as a static site. Good enough to show prospects today; upgrade later.
   domain TODO).
 
 ## TODO
-- [ ] Decide domain (keel.ai / getkeel.com).
+- [ ] Decide + register domain for Otira (e.g. otira.ai / otira.com / getotira.com) and run the clearance checklist in `../docs/brand-naming.md`.
 - [ ] Add real logo + favicon (see `../assets/`).
 - [ ] Wire the "Book a call" button to a scheduling link.
 - [ ] Add 1–2 quantified proof points once the first deployment is live.

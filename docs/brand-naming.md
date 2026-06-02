@@ -1,9 +1,15 @@
 # Brand & Naming
 
-> Status after deep research (2026-05-31): the AI-ops space is **saturated**. Most "good" names
-> (real words, human names, and even coinages) are taken — often by direct competitors. A clean,
-> ownable name will likely be an **invented word**, and MUST be formally cleared (domain + USPTO
-> + state) before we commit. Don't over-invest here yet; an internal codename is enough to move.
+> **Status (2026-06-01): Company name finalized → Otira.** After deep research the AI-ops space is
+> **saturated** — most real words, human names, and coinages are taken, often by direct competitors.
+> "Otira" showed no obvious AI/software collision and has been selected as our name. **Still open:**
+> domain selection/registration and the formal clearance checklist below (USPTO + handles) before
+> any meaningful brand spend.
+
+## ✅ Finalized name: **Otira**
+Chosen 2026-06-01. Replaces the earlier internal codename status. No obvious AI/software collision
+was found in search; treat the clearance checklist below as the remaining due diligence (especially
+domain + USPTO) before public launch or brand spend.
 
 ## ⛔ Retired: "Keel"
 `keel.so` is a funded London startup that is **a direct competitor** ("the modern ERP for
@@ -20,16 +26,11 @@ From research, all in active use in AI/ops/SaaS (often doing our exact thing):
   (AI CFO / AI dev), **Tova** (health AI), **Tovi** (kids toy), **Dray/Draya** (drayage AI),
   **Tally/Tend/Lattice/Sage/Pilot/Relay/Knack/Cohere** (established SaaS).
 
-## Provisional internal codename: **Otira**
-Used only so we have a handle while we work. Searches showed **no obvious AI/software collision**
-for "Otira" (or "Wexa") — but this is **NOT** clearance. Treat as provisional; one find/replace to change.
-
-## Candidate palette (least-collided in search — all PENDING formal clearance)
+## Considered alternatives (not selected)
 | Candidate | Feel | Notes |
 |---|---|---|
-| **Otira** | soft, brandable, neutral | provisional pick; no obvious collision found |
+| **Otira** ✅ | soft, brandable, neutral | **selected**; no obvious collision found |
 | **Wexa** | techy, short | no obvious collision found; reads more "AI-generic" |
-| *(invent more)* | | coin 2-syllable, easy-to-say words; avoid dictionary words |
 
 ## Naming criteria
 1. Easy to say/spell for a non-tech owner (wine, toys) AND credible to investors.
@@ -46,7 +47,7 @@ for "Otira" (or "Wexa") — but this is **NOT** clearance. Treat as provisional;
 - [ ] Run final pick past a trademark attorney before spending on brand.
 
 ## Recommendation
-Keep **Otira** as the internal codename, keep building, and run the clearance checklist on your
-top 2–3 favorites before any public launch or spend. The name matters far less right now than
-**owning the wine vertical** and **landing the first client** — the space is too crowded to win
-on a name alone (see `competitive-research.md`).
+The name is locked to **Otira**. Next: register the domain and complete the clearance checklist
+above (USPTO + handles) before any public launch or brand spend. Even so, the name matters far
+less right now than **owning the wine vertical** and **landing the first client** — the space is
+too crowded to win on a name alone (see `competitive-research.md`).

@@ -3,7 +3,7 @@
 Brand and visual assets — logo, favicon, colors, fonts, images used by the website and decks.
 
 ## Brand basics (current)
-- **Name:** Otira (provisional codename — see [`../docs/brand-naming.md`](../docs/brand-naming.md)).
+- **Name:** Otira (finalized; domain TBD — see [`../docs/brand-naming.md`](../docs/brand-naming.md)).
 - **Palette (from the deck/site):** ink `#eef2fb` on dark `#0a0e1a`; accent gradient
   `#6c8cff → #9d7bff → #7af0d0`; muted `#97a3c2`.
 - **Type:** system sans (Inter/SF). Clean, modern, high-contrast.

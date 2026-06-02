@@ -1,9 +1,9 @@
 # AGENTS.md — Operating Guide for AI Agents
 
-This repo is the operating system for our company (provisional codename: **Otira**): we build **AI
+This repo is the operating system for our company, **Otira**: we build **AI
 coworkers for SMBs via forward-deployed implementations**. Read this before doing work here.
-*(Otira is provisional and unverified; "Keel" was retired due to a direct-competitor collision.
-Name needs formal clearance — see [`docs/brand-naming.md`](docs/brand-naming.md).)*
+*(Otira is our **finalized** company name. The earlier "Keel" was retired due to a direct-competitor
+collision. Domain selection is still open — see [`docs/brand-naming.md`](docs/brand-naming.md).)*
 
 ## What this project is
 A reusable **context layer + connectors** on top of the systems a company already uses, plus
@@ -49,5 +49,5 @@ Full thesis: [`docs/strategy.md`](docs/strategy.md).
   A skill is the *ability* to do something; an artifact is the *thing produced*. Never put
   artifacts (a website, a deck, contracts, product code) inside `skills/`.
 - Cross-link related docs. Date research and meeting notes (`YYYY-MM-DD`).
-- Company name is provisional **Otira** (unverified; see `docs/brand-naming.md`).
+- Company name is **Otira** (finalized; domain TBD — see `docs/brand-naming.md`).
 - **Never commit secrets or signed contracts with real client data** (respect `.gitignore`).

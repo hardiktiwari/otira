@@ -1,8 +1,8 @@
 # Otira — AI Coworkers for SMBs
 
-> *(Otira is a **provisional** internal codename. The prior name "Keel" was retired — it collides
-> with a direct competitor (keel.so). The space is crowded; the name needs formal clearance before
-> we commit. See [`docs/brand-naming.md`](docs/brand-naming.md).)*
+> *(**Otira** is our finalized company name. The prior name "Keel" was retired — it collides
+> with a direct competitor (keel.so). Domain selection is still open. See
+> [`docs/brand-naming.md`](docs/brand-naming.md).)*
 
 > We build **AI coworkers** for small and mid-sized businesses via **forward-deployed
 > implementations**: a reusable **context layer + connectors** on top of the systems a
@@ -76,6 +76,12 @@ PPT, biz-development, ai-strategy, dev, research, meeting-notes, writing. See [`
 - **Forward deployment** — the delivery model: we embed for a few weeks, build the context
   layer + connectors + automations custom to the client, then leave (with a retainer).
 - **Coworker** — the end experience: an AI you tag in Slack/email that does tasks for you.
+
+## Working in this repo
+- Workflow, branch, and commit conventions: [`CONTRIBUTING.md`](CONTRIBUTING.md).
+- Agent operating guide: [`AGENTS.md`](AGENTS.md).
+- **Pushing:** the work machine blocks external pushes (company policy) — push from a personal
+  machine, which is the source of truth.
 
 ## Working principles
 

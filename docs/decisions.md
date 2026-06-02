@@ -54,10 +54,18 @@ Decision · Revisit-if.
   code before promising any production automation that touches money or mission-critical ops.
 - **Revisit if:** Scope stays strictly read-only/advisory (lower bar).
 
+### D8 — Company name: Otira
+- **Date:** 2026-06-01 · **Status:** Active
+- **Context:** "Keel" was retired (collides with direct competitor keel.so); "Otira" carried as an
+  internal codename with no obvious AI/software collision found in research.
+- **Decision:** Finalize the company name as **Otira**. Domain not yet chosen; formal clearance
+  (USPTO + handles) still pending before public launch or brand spend (see `brand-naming.md`).
+- **Revisit if:** Clearance surfaces a blocking trademark/domain collision.
+
 ---
 
 ## Open decisions (not yet made)
 - **Service vs. platform emphasis** (affects margins + fundraising story).
 - **Cameron's role** — customer, cofounder, or both.
 - **Raise vs. bootstrap** (services revenue could fund the build).
-- **Company name.**
+- **Domain selection for Otira** (name finalized in D8; domain + formal clearance still open).
