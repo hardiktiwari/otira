@@ -26,9 +26,9 @@
   ERP becomes a commodity system of record.
 - **ICP debate:** one founder was a "big no" on SMBs (thin needs); operator strongly pushed SMB
   (operators "foam at the mouth" — headcount savings + quality of life). Landed on **wine,
-  $10–30M, ~dozen employees**. Intuit defines $10–30M as mid-market.
+  $10–30M, ~dozen employees**. Major accounting/ERP vendors define $10–30M as mid-market.
 - **Competitors discussed:** Varick (forward-deployed service, funded), Doss (ERP replacement),
-  Coworker.ai, BlackLine (FinOps reporting on QBO), Intuit IES (ERP-native agents, don't reach
+  Coworker.ai, BlackLine (FinOps reporting on QBO), ERP-native agent suites (don't reach
   outside-ERP data), point apps (~⅓ FTE cost). Healthcare is a current startup hotspot.
 - **End-state:** a "company sandbox" (Claude/agent on a VM) with data + logic + connectors +
   memory; anyone tags it to act.

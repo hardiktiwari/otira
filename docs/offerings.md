@@ -62,7 +62,7 @@ Because automations can *act* (not just report), trust is a feature we sell:
 
 ## What makes this defensible
 
-- We connect to **data outside the ERP** (email, etc.) that ERP-native agents (Intuit IES) ignore.
+- We connect to **data outside the ERP** (email, etc.) that ERP-native agents ignore.
 - We **sit with the client** and build the custom context layer — incumbents won't.
 - We **act**, not just analyze (vs. Sapien/BlackLine). See [`competitive-research.md`](competitive-research.md).
 - Vertical depth (wine) where horizontal platforms treat the domain as an edge case.

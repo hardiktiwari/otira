@@ -16,7 +16,7 @@ they can tag in Slack/email to get work done.
 ## What we are NOT building
 
 - **Not an ERP.** Too messy, too long to build, and the market will have moved by the time
-  it ships. ERPs are also where incumbents (NetSuite, Intuit IES, Doss) are already fighting.
+  it ships. ERPs are also where incumbents (NetSuite, ERP-native agent suites, Doss) are already fighting.
 - **Not a generic chatbot.** A bare LLM doesn't connect to live systems, doesn't know the
   business's rules, and can't show its work or take real actions safely.
 
@@ -82,8 +82,8 @@ playbook sharper.
 
 ## Target customer (ICP) — current view
 
-- **Wine importers/distributors, ~$10–30M revenue, ~dozen employees.** (Note: Intuit defines
-  $10–30M as "mid-market," so this is a real, money-backed segment, not "too small.")
+- **Wine importers/distributors, ~$10–30M revenue, ~dozen employees.** (Note: major accounting/ERP
+  vendors define $10–30M as "mid-market," so this is a real, money-backed segment, not "too small.")
 - Value prop is **two-sided**: (1) replace/avoid back-office headcount (hard-dollar ROI), and
   (2) **quality of life** — give an owner 10–20 hours/week back (sells even with no layoffs).
 

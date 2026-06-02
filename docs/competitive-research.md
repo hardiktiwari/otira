@@ -9,7 +9,7 @@
                  ENTERPRISE / MID-MARKET
                           ▲
         Sapien            │      Doss (ERP replacement)
-        BlackLine         │      Intuit IES
+        BlackLine         │      ERP-native suites
    (ANALYZE) ─────────────┼───────────────── (ACT)
         Point apps        │      Varick (forward-deployed agents)
                           │      ► US (wine, SMB, forward-deployed)
@@ -35,7 +35,7 @@ funded players cluster in *analyze* and/or *enterprise*.
 - **What:** AI-native "Adaptive ERP" / Operations Cloud. Composable no-code ERP alternative
   (tables/forms/workflows) + Dossbot AI copilot + built-in BI. Plugs into QuickBooks/NetSuite.
 - **ICP:** mid-market consumer goods / F&B / manufacturing / distribution, $20–250M revenue.
-- **Funding:** ~$73M total (Series B $55M; investors incl. Intuit Ventures).
+- **Funding:** ~$73M total (Series B $55M; investors incl. a major ERP vendor's corporate VC arm).
 - **Difference from us:** Doss wants to *be* the operations system (adopt their platform). We
   layer on top of what you already run, done-for-you, and leave you self-sufficient.
 - **Why-us vs. Doss:** no platform adoption; vertical depth (Doss is "less ideal for highly
@@ -67,8 +67,8 @@ funded players cluster in *analyze* and/or *enterprise*.
 ## Coworker.ai — naming/positioning comp
 - **What:** "Your AI coworker" positioning. Watch how they frame the coworker experience.
 
-## Intuit IES (Intuit Enterprise Suite) — incumbent moving in
-- **What:** Intuit's push into mid-market ERP with agents on top.
+## ERP-native incumbents (enterprise suites moving in)
+- **What:** Incumbent ERP vendors pushing into mid-market with agents bolted on top.
 - **Gap we exploit:** ERP-native agents **don't reach data outside the ERP** (email, etc.) and
   won't sit with you to build a custom context layer. ERPs also guard their data.
 

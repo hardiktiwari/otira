@@ -20,11 +20,11 @@ and ERP replacements are slow and disruptive.
 ## Our wedge & differentiation
 - **Action, not just analysis** (vs. Sapien/BlackLine).
 - **Layer on top, no migration** (vs. Doss / ERP replacement).
-- **Reach data outside the ERP** + build a custom context layer (vs. Intuit IES / ERP-native agents).
+- **Reach data outside the ERP** + build a custom context layer (vs. ERP-native agents).
 - **Vertical depth (wine)** where horizontal platforms see only edge cases.
 
 ## Market
-- Target band: **$10–30M revenue SMBs** (Intuit's own "mid-market" definition) — a real,
+- Target band: **$10–30M revenue SMBs** (the standard accounting/ERP "mid-market" definition) — a real,
   money-backed segment; we start in wine and expand by vertical.
 - Buying behavior: firms already spend ~⅓ of an FTE on single point apps; a connected coworker
   that replaces headcount and reclaims owner time is an easy ROI story.
@@ -40,7 +40,7 @@ and ERP replacements are slow and disruptive.
 4. Productize the reusable engine; broaden verticals.
 
 ## Comparable funding (context)
-- **Doss** — ~$73M total (Series B $55M); Intuit Ventures among investors.
+- **Doss** — ~$73M total (Series B $55M); a major ERP vendor's corporate VC arm among investors.
 - **Sapien** — ~$8.7M seed (General Catalyst, Neo; OpenAI/Google/Stripe/Ramp angels).
 - **Varick** — well-funded, small team, forward-deployed service model.
 

@@ -10,7 +10,7 @@ Decision · Revisit-if.
 
 ### D1 — Don't build an ERP; build the layer around it
 - **Date:** 2026-05-31 · **Status:** Active
-- **Context:** ERPs are slow, messy, and where incumbents (NetSuite, Doss, Intuit IES) fight.
+- **Context:** ERPs are slow, messy, and where incumbents (NetSuite, Doss, ERP-native suites) fight.
 - **Decision:** Build the intelligence layer *before* data enters and *after* it leaves the
   ERP; treat the ERP as a commodity system of record.
 - **Revisit if:** A client's ERP is so poor that data quality blocks value end-to-end.
@@ -30,7 +30,7 @@ Decision · Revisit-if.
 
 ### D4 — ICP: ~$10–30M revenue SMBs
 - **Date:** 2026-05-31 · **Status:** Active
-- **Context:** Real pain + budget; matches Intuit's "mid-market" definition; avoids 1–2 person cos.
+- **Context:** Real pain + budget; matches the standard "mid-market" definition; avoids 1–2 person cos.
 - **Decision:** Target ~$10–30M, ~dozen employees, low tech maturity, owner-operator buyer.
 - **Revisit if:** Discovery shows the value/ROI lands better above or below this band.
 
