@@ -62,6 +62,14 @@ Decision · Revisit-if.
   (USPTO + handles) still pending before public launch or brand spend (see `brand-naming.md`).
 - **Revisit if:** Clearance surfaces a blocking trademark/domain collision.
 
+### D9 — Visual design owned by a dedicated `design` skill
+- **Date:** 2026-06-01 · **Status:** Active
+- **Context:** Website/app/deck look-and-feel was implicit inside `dev`/`ppt`; we want one
+  consistent brand system across surfaces (and just adopted a glassmorphism finish on the site).
+- **Decision:** Add `skills/design` for visual look-and-feel (brand tokens, UI patterns, finishes
+  like glassmorphism); `dev` builds, `ppt` does slides, `design` defines the look.
+- **Revisit if:** A designer/brand agency takes this over, or surfaces diverge enough to split.
+
 ---
 
 ## Open decisions (not yet made)

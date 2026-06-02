@@ -9,6 +9,7 @@ instructions). These live in the repo as shared IP/playbooks.
 | [`biz-development/`](biz-development/SKILL.md) | Discovery calls, qualifying SMBs, pitching forward deployment |
 | [`ai-strategy/`](ai-strategy/SKILL.md) | Designing the context layer, connectors, automation/trust patterns |
 | [`dev/`](dev/SKILL.md) | Building connectors, the agent/sandbox, dashboards, safe write-backs, website |
+| [`design/`](design/SKILL.md) | Visual look-and-feel of the website/app/decks — brand system, UI patterns, glassmorphism |
 | [`research/`](research/SKILL.md) | Researching a competitor/market and capturing it into the docs |
 | [`meeting-notes/`](meeting-notes/SKILL.md) | Turning a transcript into structured notes + doc updates |
 | [`writing/`](writing/SKILL.md) | Plain-English explainers, exec/investor comms, outreach |

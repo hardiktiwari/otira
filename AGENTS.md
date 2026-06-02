@@ -25,6 +25,7 @@ Full thesis: [`docs/strategy.md`](docs/strategy.md).
 | Discovery call, qualifying, objections, pricing | `skills/biz-development` |
 | Design context layer / connectors / automations / trust | `skills/ai-strategy` |
 | Build connectors, agent, dashboards, write-backs, website | `skills/dev` |
+| Visual design / look-and-feel of website, app, or decks | `skills/design` |
 | Research a competitor or market | `skills/research` |
 | Turn a meeting transcript into notes + doc updates | `skills/meeting-notes` |
 | Write explainers, exec/investor comms, outreach | `skills/writing` |

@@ -42,6 +42,7 @@ skill guides the work, but anything that moves money needs a real AI engineer (s
 - Parallel-run new automations before cutover; especially anything feeding accounting/CPA.
 
 ## Website (marketing)
+- For the visual look-and-feel (brand system, UI patterns, glassmorphism), use `skills/design`.
 - Modern, fast, outcome-focused (cf. Varick/Doss/Sapien sites). Static site or simple framework.
 - Sections: hero (outcome), how-it-works (embed → connect → contextualize → automate → handoff),
   use cases, "vs. just using ChatGPT," security, FAQ, book-a-call.
