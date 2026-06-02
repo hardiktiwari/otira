@@ -5,8 +5,14 @@ The marketing / pitch site for Otira. This is an **artifact (a codebase)**, not 
 the *site itself* lives here.
 
 ## Status
-`index.html` — a lean, single-file starter landing page (no build step). Open it in a browser
-or deploy as a static site. Good enough to show prospects today; upgrade later.
+`index.html` — single-file static site styled per [`../skills/design/DESIGN.md`](../skills/design/DESIGN.md)
+(Intercom-inspired: cream canvas, charcoal type, white cards, product-mockup-led). Open in a browser
+or deploy as static hosting.
+
+## Design system
+- **Spec:** [`../skills/design/DESIGN.md`](../skills/design/DESIGN.md) — tokens, components, do's/don'ts.
+- **Skill:** [`../skills/design/SKILL.md`](../skills/design/SKILL.md) — how agents apply the system.
+- **Font:** Inter (Saans substitute) via Google Fonts.
 
 ## Stack decision
 - **Now:** single static `index.html` (inline CSS) — zero dependencies, instant to host/share.
@@ -19,10 +25,12 @@ or deploy as a static site. Good enough to show prospects today; upgrade later.
 - Lead with the owner's pain and the outcome. One clear CTA: **book a call**.
 - Sections: hero → how it works → use cases → "vs. just using ChatGPT" → trust/security → FAQ → CTA.
 
-## Deploy (later)
-- Static host: drag-and-drop or connect the repo.
-- Or droplet: copy files behind Caddy/Nginx; point the domain (see `../docs/brand-naming.md` for
-  domain TODO).
+## Deploy
+- **GitHub Pages (preview branch):** push to `website/landing-preview` — workflow
+  `.github/workflows/deploy-website.yml` publishes `website/` to Pages.
+  Live URL: `https://hardiktiwari.github.io/otira/` (after Pages is enabled on the repo).
+- **Static host:** drag-and-drop `website/` or connect the repo to Vercel/Netlify.
+- **Droplet:** copy files behind Caddy/Nginx; point the domain (see `../docs/brand-naming.md`).
 
 ## TODO
 - [ ] Decide + register domain for Otira (e.g. otira.ai / otira.com / getotira.com) and run the clearance checklist in `../docs/brand-naming.md`.
