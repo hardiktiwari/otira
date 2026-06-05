@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<!-- deploy pipeline test: 2026-06-04 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Otira — AI finance coworker for your teams</title>
-<meta name="description" content="Otira is the AI finance coworker for your teams — connects SAP, QuickBooks, Sage, and the spreadsheets you already use. Automate close, reporting, and variance with cited, trusted answers." />
+<title>Otira — AI coworkers for wine importers and distributors</title>
+<meta name="description" content="Otira helps small wine importers and distributors turn order emails, vendor invoices, inventory updates, and sales reports into approved work inside the tools they already use." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -183,17 +182,36 @@
   .hero {
     padding-top: 80px; padding-bottom: 48px;
     position: relative; overflow: hidden;
+    --hero-dot-x: 50%;
+    --hero-dot-y: 50%;
+    --hero-dot-hover: 0;
+  }
+  .hero::before,
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(17,17,17,0.11) 1px, transparent 1.2px);
+    background-size: 24px 24px;
+    background-position: center top;
+    pointer-events: none;
   }
   .hero::before {
-    content: ""; position: absolute; inset: 0 0 40%;
-    background-image: radial-gradient(circle, var(--hairline) 1px, transparent 1px);
-    background-size: 24px 24px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent);
-    pointer-events: none;
+    mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(180deg, black 0%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(180deg, black 0%, black 90%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+  }
+  .hero::after {
+    background-image: radial-gradient(circle, rgba(255,86,0,0.65) 1px, transparent 1.25px);
+    opacity: var(--hero-dot-hover);
+    mask-image: radial-gradient(circle 180px at var(--hero-dot-x) var(--hero-dot-y), black 0%, transparent 72%);
+    -webkit-mask-image: radial-gradient(circle 180px at var(--hero-dot-x) var(--hero-dot-y), black 0%, transparent 72%);
+    transition: opacity 0.16s ease;
   }
   .hero-inner {
     position: relative;
+    z-index: 1;
     display: grid; grid-template-columns: 1.15fr 0.8fr;
     gap: 64px; align-items: center;
   }
@@ -267,6 +285,45 @@
     font-family: var(--font); font-size: 13px;
   }
   .mockup-ask strong { color: var(--on-primary); font-weight: 500; }
+  .task-composer {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 14px 16px; margin-bottom: 14px;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    font-family: var(--font);
+  }
+  .task-composer span { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .task-plus {
+    width: 34px; height: 34px; flex: 0 0 34px;
+    display: grid; place-items: center;
+    border-radius: 50%; background: var(--ink); color: var(--on-primary);
+    font-size: 20px; line-height: 1;
+  }
+  .task-list {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    padding: 10px 14px;
+    font-family: var(--font);
+  }
+  .task-item {
+    display: grid; grid-template-columns: 18px 1fr;
+    gap: 12px; padding: 13px 0;
+    border-bottom: 1px solid var(--hairline-soft);
+  }
+  .task-item:last-child { border-bottom: none; }
+  .task-check {
+    width: 14px; height: 14px; margin-top: 3px;
+    border: 1px solid var(--hairline); border-radius: 4px;
+    background: var(--surface-1);
+  }
+  .task-check.active { background: var(--ink); border-color: var(--ink); }
+  .task-title { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .task-note { display: block; font-size: 12px; line-height: 1.45; color: var(--ink-muted); }
+  .task-note strong { color: var(--fin-orange); font-weight: 500; }
+  .task-note .blue { color: var(--report-blue); font-weight: 500; }
+  .task-done { color: var(--ink-subtle); text-decoration: line-through; }
 
   /* value props — Aleph 3-up + quote */
   .value-section { padding-bottom: var(--section); }
@@ -288,6 +345,62 @@
   }
   .value-card h3 { margin-bottom: 12px; font-size: 20px; }
   .value-card p { font-size: 15px; color: var(--ink-muted); line-height: 1.55; }
+
+  /* integrations */
+  .integrations-section { padding-top: 0; text-align: center; }
+  .integration-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 980px;
+    margin: 36px auto 0;
+    padding: 6px 0;
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+  .integration-tile {
+    min-height: 0;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline-soft);
+    border-radius: 999px;
+    padding: 10px 16px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    box-shadow: var(--shadow-sm);
+  }
+  .integration-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    border-radius: 4px;
+    flex: 0 0 18px;
+  }
+  .integration-name { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .integration-type { display: none; }
+  .integration-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 28px;
+    padding: 12px 18px;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: var(--surface-1);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  @media (max-width: 1024px) {
+    .integration-cloud {
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+  }
+
   .quote-featured {
     display: grid; grid-template-columns: 1.2fr 1fr;
     gap: 24px; align-items: stretch;
@@ -393,7 +506,30 @@
   }
 
   /* context layer architecture (Otira-adapted) */
-  .arch-section { padding-top: 0; }
+  .arch-section {
+    position: relative;
+    overflow: hidden;
+    padding-top: var(--section);
+  }
+  .arch-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(17,17,17,0.12) 1px, transparent 1.2px);
+    background-size: 18px 18px;
+    background-position: center top;
+    mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%),
+      linear-gradient(180deg, black 0%, black 76%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%),
+      linear-gradient(180deg, black 0%, black 76%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+    pointer-events: none;
+  }
+  .arch-section > .wrap {
+    position: relative;
+    z-index: 1;
+  }
   .arch-diagram {
     background: var(--surface-1);
     border: 1px solid var(--hairline);
@@ -532,6 +668,84 @@
     .arch-core-tabs { flex-wrap: wrap; }
   }
 
+  /* setup cards */
+  .setup-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 34px;
+    margin: 8px 0 42px;
+  }
+  .setup-grid::before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: 18px;
+    right: 18px;
+    height: 1px;
+    background: var(--hairline);
+  }
+  .setup-card {
+    position: relative;
+    z-index: 1;
+    padding: 0;
+    background: transparent;
+  }
+  .setup-visual {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    box-shadow: 0 0 0 8px var(--canvas);
+  }
+  .setup-icon {
+    width: auto;
+    height: auto;
+    display: grid;
+    place-items: center;
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    color: var(--on-primary);
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: none;
+  }
+  .setup-body { padding: 0; }
+  .setup-body h3 {
+    font-size: 18px;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .setup-body p {
+    color: var(--ink-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  @media (max-width: 900px) {
+    .setup-grid { grid-template-columns: 1fr; gap: 24px; }
+    .setup-grid::before {
+      top: 16px;
+      bottom: 16px;
+      left: 16px;
+      right: auto;
+      width: 1px;
+      height: auto;
+    }
+    .setup-card {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .setup-visual { margin-bottom: 0; }
+  }
+
   /* mini UI panels for platform visuals */
   .ui-panel {
     background: var(--surface-1);
@@ -562,27 +776,165 @@
   .ui-table .pos { color: var(--report-green); }
 
   /* use cases */
-  .use-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+  .use-showcase {
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
     gap: 20px;
+    align-items: stretch;
+    margin-bottom: 28px;
   }
-  .use-card {
+  .use-flow {
+    display: grid;
+    gap: 14px;
+  }
+  .flow-step {
+    position: relative;
     background: var(--surface-1);
     border: 1px solid var(--hairline);
     border-radius: var(--radius-xl);
-    padding: 32px 28px;
+    padding: 20px;
     box-shadow: var(--shadow-sm);
-    transition: box-shadow 0.2s ease;
   }
-  .use-card:hover { box-shadow: var(--shadow-md); }
-  .use-card h3 { margin-bottom: 10px; font-size: 20px; }
-  .use-card p { font-size: 15px; color: var(--ink-muted); line-height: 1.55; margin-bottom: 16px; }
+  .flow-step::before {
+    content: attr(data-step);
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--on-primary);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .flow-step h3 { font-size: 18px; margin-bottom: 8px; }
+  .flow-step p { font-size: 14px; color: var(--ink-muted); line-height: 1.5; }
+  .use-live-card {
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255, 86, 0, 0.12), transparent 28%),
+      radial-gradient(circle at 80% 20%, rgba(101, 181, 255, 0.18), transparent 32%),
+      var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-2xl);
+    padding: 24px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .use-live-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: var(--ink-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .use-live-kicker::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--report-green);
+  }
+  .mini-task {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 0;
+    border-top: 1px solid var(--hairline-soft);
+  }
+  .mini-task:first-of-type { border-top: none; }
+  .mini-task-icon {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--canvas);
+    font-size: 16px;
+  }
+  .mini-task-title { display: block; font-size: 14px; font-weight: 600; color: var(--ink); }
+  .mini-task-note { display: block; margin-top: 3px; font-size: 12px; color: var(--ink-muted); line-height: 1.4; }
+  .mini-task-status {
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--canvas);
+    color: var(--ink-muted);
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .use-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .use-card {
+    position: relative;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+    min-height: 118px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    overflow: hidden;
+  }
+  .use-card:hover,
+  .use-card:focus-within {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .use-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    background: var(--canvas);
+    font-size: 14px;
+  }
+  .use-card h3 { margin-bottom: 0; font-size: 18px; line-height: 1.25; }
+  .use-card p {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.45;
+    transition: max-height 0.22s ease, opacity 0.18s ease, margin 0.22s ease;
+  }
+  .use-card:hover p,
+  .use-card:focus-within p {
+    max-height: 120px;
+    opacity: 1;
+    margin: 10px 0 14px;
+  }
   .use-link {
-    font-size: 14px; font-weight: 500; color: var(--ink);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    font-size: 13px; font-weight: 600; color: var(--ink);
     display: inline-flex; align-items: center; gap: 4px;
+    transition: max-height 0.22s ease, opacity 0.18s ease;
+  }
+  .use-card:hover .use-link,
+  .use-card:focus-within .use-link {
+    max-height: 24px;
+    opacity: 1;
   }
   .use-link::after { content: "→"; transition: transform 0.15s; }
   .use-card:hover .use-link::after { transform: translateX(3px); }
+  @media (max-width: 900px) {
+    .use-showcase { grid-template-columns: 1fr; }
+    .use-grid { grid-template-columns: 1fr; }
+  }
 
   /* testimonials — Aleph grid */
   .testimonials { background: var(--surface-1); border: none; }
@@ -960,7 +1312,7 @@
 </head>
 <body>
 
-<div class="announce-bar">
+<div class="announce-bar" hidden>
   <span class="new-badge">New</span>
   Otira Agent MCP — bring trusted finance data to Claude, ChatGPT, and Cursor.
   <a href="#ai">Learn more →</a>
@@ -970,14 +1322,13 @@
   <div class="wrap nav">
     <div class="logo"><span class="logo-mark" aria-hidden="true">O</span>Otira</div>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#platform">Platform</a>
       <a href="#uses">Use cases</a>
-      <a href="#works">Integrations</a>
-      <a href="#customers">Customers</a>
+      <a href="#integrations">Integrations</a>
       <a href="#trust">Trust</a>
+      <a href="#architecture">How it works</a>
     </nav>
     <div class="nav-actions">
-      <a class="btn btn-ghost" href="mailto:hello@otira.example">Sign in</a>
+      <a class="btn btn-ghost" href="#faq">FAQ</a>
       <a class="btn btn-primary" href="#book">Book a demo</a>
     </div>
   </div>
@@ -986,92 +1337,165 @@
 <section class="hero">
   <div class="wrap hero-inner">
     <div class="hero-copy">
-      <span class="badge-ai">Meet the Otira coworker</span>
-      <h1>AI coworkers for finance teams.</h1>
-      <p class="subhead">Close faster. Explain every variance. Drive decisions with cited data — all from the ERP and spreadsheets your team already runs. SAP, QuickBooks, Sage, and more.</p>
+      <h1>AI coworkers for wine importers and distributors.</h1>
+      <p class="subhead">Otira learns how your wine business works, connects to the tools your team already uses, then turns orders, invoices, inventory, and reporting into approved work.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#book">Book a demo</a>
-        <a class="btn btn-secondary" href="#platform">See the platform</a>
+        <a class="btn btn-secondary" href="#uses">See use cases</a>
       </div>
       <div class="rating-pill">
-        <span class="stars">★★★★★</span>
-        <span><strong>Trusted by finance teams</strong> · SAP · QuickBooks · Sage</span>
+        <span class="stars">Email</span>
+        <span><strong>Order desk, invoices, inventory, and reporting</strong></span>
       </div>
     </div>
     <div class="mockup-wrap" aria-hidden="true">
       <div class="mockup-chrome">
         <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
-        <span class="mockup-title">Otira Agent · Income statement · AI variance</span>
+        <span class="mockup-title">Otira Coworker · Today</span>
       </div>
       <div class="mockup-body">
-        <div class="mockup-row">
-          <span class="mockup-label">Revenue vs budget</span>
-          <span class="mockup-value down">−3.1%</span>
+        <div class="task-composer">
+          <span>What should Otira handle next?</span>
+          <div class="task-plus">+</div>
         </div>
-        <div class="mockup-row">
-          <span class="mockup-label">COGS · inventory timing</span>
-          <span class="mockup-value">+$18.4k</span>
+        <div class="task-list">
+          <div class="task-item">
+            <span class="task-check"></span>
+            <span>
+              <span class="task-title">Prepare order from Acme Bistro email</span>
+              <span class="task-note"><strong>Needs approval:</strong> matched 12 cases Barolo 2019, checked allocation and price list.</span>
+            </span>
+          </div>
+          <div class="task-item">
+            <span class="task-check"></span>
+            <span>
+              <span class="task-title">Code invoice from Piedmont supplier</span>
+              <span class="task-note">Matched vendor, PO, freight line, and due date in accounting.</span>
+            </span>
+          </div>
+          <div class="task-item">
+            <span class="task-check"></span>
+            <span>
+              <span class="task-title">Draft reorder for low-stock SKUs</span>
+              <span class="task-note"><span class="blue">FYI:</span> 4 fast-moving wines fall below two-week cover.</span>
+            </span>
+          </div>
+          <div class="task-item">
+            <span class="task-check active"></span>
+            <span>
+              <span class="task-title task-done">Send weekly sales and inventory recap</span>
+              <span class="task-note">Sent with source links from email, inventory, and QuickBooks.</span>
+            </span>
+          </div>
         </div>
-        <div class="mockup-row">
-          <span class="mockup-label">Enterprise segment</span>
-          <span class="mockup-value up">+$6.1k</span>
-        </div>
-        <div class="mockup-chart">
-          <div class="mockup-bar lo"></div>
-          <div class="mockup-bar mid"></div>
-          <div class="mockup-bar hi"></div>
-          <div class="mockup-bar mid"></div>
-          <div class="mockup-bar lo"></div>
-        </div>
-        <div class="mockup-variance">
-          <strong>AI variance note</strong>
-          Decrease in Enterprise revenue partially offset by Mid-market and SMB increases. Inventory timing drove COGS uplift.
-        </div>
-        <span class="mockup-cite">● Sources: Sage · QBO · SAP GL · cited</span>
-        <div class="mockup-ask"><strong>Ask Otira:</strong> What drove gross margin change month over month?</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="architecture" class="arch-section">
+<section id="uses">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Use cases</span>
+      <h2>Give your business an AI coworker.</h2>
+      <p class="lead">Otira learns how your team works, connects to your tools, then prepares orders, invoices, inventory moves, and reports for approval.</p>
+    </div>
+    <div class="setup-grid">
+      <article class="setup-card">
+        <div class="setup-visual">
+          <div class="setup-icon">1</div>
+        </div>
+        <div class="setup-body">
+          <h3>Learns how you work</h3>
+          <p>Customers, wine names, vintages, allocations, pricing exceptions, approval rules, and the shortcuts your team uses every day.</p>
+        </div>
+      </article>
+      <article class="setup-card">
+        <div class="setup-visual">
+          <div class="setup-icon">2</div>
+        </div>
+        <div class="setup-body">
+          <h3>Connects to your tools</h3>
+          <p>Email, PDFs, spreadsheets, accounting, ERP, inventory files, and shared drives — without forcing a system migration.</p>
+        </div>
+      </article>
+      <article class="setup-card">
+        <div class="setup-visual">
+          <div class="setup-icon">3</div>
+        </div>
+        <div class="setup-body">
+          <h3>Then gets to work via email, Slack, or app</h3>
+          <p>Drafts the next action, cites the source, flags uncertainty, and waits for the right person to approve.</p>
+        </div>
+      </article>
+    </div>
+    <div class="use-grid">
+      <div class="use-card">
+        <span class="use-icon">✉</span>
+        <h3>Turn emails into orders</h3>
+        <p>A customer emails an order. Otira reads it, matches wine names, vintages, products, pricing, and stock, then prepares the order for approval.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <span class="use-icon">$</span>
+        <h3>Handle vendor invoices</h3>
+        <p>Vendor invoices are captured, coded, matched to vendors or purchase orders, and queued for payment once you approve.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <span class="use-icon">↻</span>
+        <h3>Keep inventory on track</h3>
+        <p>Otira watches cases, costs, vintages, and locations, then suggests reorders or drafts purchase orders before stock runs low.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <span class="use-icon">↗</span>
+        <h3>Watch the numbers</h3>
+        <p>Live views and alerts flag margin, cash, inventory, or sales changes before they become bigger problems.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture-old" class="arch-section" hidden>
   <div class="wrap">
     <div class="section-head" style="margin-bottom:40px;">
-      <span class="label-caps">Architecture</span>
-      <h2>The context layer for finance AI</h2>
-      <p class="lead" style="margin-bottom:0;">Generic AI doesn't know your chart, close process, or how you define revenue. Otira sits between your systems and every agent — one portable context your team certifies and every tool inherits.</p>
+      <span class="label-caps">How it works</span>
+      <h2>Learns how you work. Connects to your tools. Then gets to work.</h2>
+      <p class="lead" style="margin-bottom:0;">Generic AI does not know your vintages, allocations, customer pricing, or warehouse reality. Otira learns those rules, checks the source systems, and prepares work for approval.</p>
     </div>
-    <div class="arch-diagram" role="img" aria-label="Otira context layer architecture: coworkers and interfaces on top, Otira context layer in the middle, business systems below">
+    <div class="arch-diagram" role="img" aria-label="Otira workflow: business inputs on top, company rules in the middle, existing systems below">
       <div class="arch-layer">
-        <div class="arch-layer-label">Coworkers<br>&amp; interfaces</div>
+        <div class="arch-layer-label">Daily<br>work</div>
         <div class="arch-layer-body">
           <div class="arch-row">
             <div class="arch-box">
-              <div class="arch-box-title">Finance workflows</div>
+              <div class="arch-box-title">Customer orders</div>
               <div class="arch-icons">
-                <span class="arch-icon">Close</span>
-                <span class="arch-icon">Variance</span>
-                <span class="arch-icon">Flux</span>
+                <span class="arch-icon">Email</span>
+                <span class="arch-icon">PDF</span>
+                <span class="arch-icon">EDI</span>
               </div>
             </div>
             <div class="arch-box">
-              <div class="arch-box-title">Otira coworker</div>
+              <div class="arch-box-title">Vendor invoices</div>
               <div class="arch-icons">
-                <span class="arch-icon otira">O</span>
-                <span class="arch-icon">Ask</span>
-                <span class="arch-icon">Act</span>
+                <span class="arch-icon">Bills</span>
+                <span class="arch-icon">POs</span>
+                <span class="arch-icon">Terms</span>
               </div>
             </div>
             <div class="arch-box">
-              <div class="arch-box-title">AI assistants</div>
+              <div class="arch-box-title">Inventory moves</div>
               <div class="arch-icons">
-                <span class="arch-icon">Claude</span>
-                <span class="arch-icon">ChatGPT</span>
-                <span class="arch-icon">Cursor</span>
+                <span class="arch-icon">Stock</span>
+                <span class="arch-icon">Cases</span>
+                <span class="arch-icon">Costs</span>
               </div>
             </div>
             <div class="arch-box">
-              <div class="arch-box-title">Where you work</div>
+              <div class="arch-box-title">Team questions</div>
               <div class="arch-icons">
                 <span class="arch-icon">Slack</span>
                 <span class="arch-icon">Excel</span>
@@ -1088,20 +1512,20 @@
       </div>
 
       <div class="arch-layer">
-        <div class="arch-layer-label highlight">Open &amp;<br>portable context</div>
+        <div class="arch-layer-label highlight">Company<br>rules</div>
         <div class="arch-layer-body arch-core-wrap">
           <div class="arch-core-tabs" aria-hidden="true">
-            <span class="arch-core-tab">Context repo</span>
-            <span class="arch-core-tab">Context repo</span>
-            <span class="arch-core-tab">Context repo</span>
+            <span class="arch-core-tab">Products</span>
+            <span class="arch-core-tab">Customers</span>
+            <span class="arch-core-tab">Approvals</span>
           </div>
           <div class="arch-core">
-            <div class="arch-core-title">Otira <span>context layer</span></div>
+            <div class="arch-core-title">Otira <span>coworker</span></div>
             <div class="arch-core-grid">
-              <div class="arch-core-cell">Master data graph</div>
+              <div class="arch-core-cell">SKU and vintage map</div>
               <div class="arch-core-cell">Trust &amp; approvals</div>
-              <div class="arch-core-cell">Rules &amp; definitions</div>
-              <div class="arch-core-cell">Close playbook</div>
+              <div class="arch-core-cell">Pricing exceptions</div>
+              <div class="arch-core-cell">Inventory logic</div>
             </div>
           </div>
         </div>
@@ -1117,35 +1541,34 @@
         <div class="arch-layer-body">
           <div class="arch-row">
             <div class="arch-box">
-              <div class="arch-box-title">ERP &amp; accounting</div>
+              <div class="arch-box-title">Accounting &amp; ERP</div>
               <div class="arch-icons">
-                <span class="arch-icon">SAP</span>
                 <span class="arch-icon">QBO</span>
                 <span class="arch-icon">Sage</span>
-                <span class="arch-icon">NetSuite</span>
+                <span class="arch-icon">ERP</span>
               </div>
             </div>
             <div class="arch-box">
-              <div class="arch-box-title">Spreadsheets &amp; models</div>
+              <div class="arch-box-title">Inventory</div>
               <div class="arch-icons">
-                <span class="arch-icon">Excel</span>
+                <span class="arch-icon">Warehouse</span>
                 <span class="arch-icon">Sheets</span>
-                <span class="arch-icon">Models</span>
+                <span class="arch-icon">Lots</span>
               </div>
             </div>
             <div class="arch-box">
-              <div class="arch-box-title">Billing &amp; operations</div>
+              <div class="arch-box-title">Sales</div>
               <div class="arch-icons">
-                <span class="arch-icon">Stripe</span>
-                <span class="arch-icon">Rippling</span>
+                <span class="arch-icon">Email</span>
                 <span class="arch-icon">CRM</span>
+                <span class="arch-icon">Reps</span>
               </div>
             </div>
             <div class="arch-box">
-              <div class="arch-box-title">Docs &amp; shared files</div>
+              <div class="arch-box-title">Files</div>
               <div class="arch-icons">
                 <span class="arch-icon">Drive</span>
-                <span class="arch-icon">SharePoint</span>
+                <span class="arch-icon">Excel</span>
                 <span class="arch-icon">PDF</span>
               </div>
             </div>
@@ -1156,7 +1579,7 @@
   </div>
 </section>
 
-<div class="logo-strip">
+<div class="logo-strip" hidden>
   <div class="wrap">
     <p class="logo-strip-label">Trusted by finance teams at</p>
     <div class="marquee" aria-hidden="true">
@@ -1178,42 +1601,115 @@
   </div>
 </div>
 
-<section class="value-section">
+<section class="value-section" id="workflow" hidden>
   <div class="wrap">
     <div class="section-head">
-      <span class="label-caps">Why Otira</span>
-      <h2>Start quickly, scale infinitely.</h2>
-      <p class="lead">Future-proof your finance team by meeting them where they are today — while providing the infrastructure to thrive in an AI-accelerated tomorrow.</p>
+      <span class="label-caps">Workflow</span>
+      <h2>Give your business an AI coworker.</h2>
+      <p class="lead">Otira learns the way your team handles orders, invoices, inventory, and reports, then prepares the next step for approval.</p>
     </div>
     <div class="value-grid">
       <div class="value-card">
-        <h3>Discover your “aha moment” on day one</h3>
-        <p>Skip multi-month onboarding. With Otira, you'll see value on your real books in weeks — not quarters.</p>
+        <h3>Learns how you work</h3>
+        <p>Otira learns your customers, wine names, vintages, allocations, pricing exceptions, approval rules, and the shortcuts your team uses every day.</p>
       </div>
       <div class="value-card">
-        <h3>Automate busywork with observable AI</h3>
-        <p>Get all the power with none of the black box. Every answer is cited back to SAP, QuickBooks, Sage, or your spreadsheet.</p>
+        <h3>Connects to your tools</h3>
+        <p>It works across email, PDFs, spreadsheets, QuickBooks or Sage, inventory files, and shared drives without forcing a new system migration.</p>
       </div>
       <div class="value-card">
-        <h3>Multiply output with the same headcount</h3>
-        <p>Cleaner data, automated reporting, and deeper insights — without hiring another analyst.</p>
+        <h3>Then gets to work</h3>
+        <p>It prepares orders, invoices, reorders, reports, and exception queues for approval so your lean team spends less time copying and checking.</p>
       </div>
     </div>
     <div class="quote-featured">
       <div class="quote-dark">
-        <blockquote>“Implementing Otira was insanely fast. We did quarter-end reporting less than three weeks after signing.”</blockquote>
-        <cite><strong>Chris B.</strong>VP of Finance · $35M distributor</cite>
+        <blockquote>Start narrow: customer order emails become approved draft orders your team can review in minutes.</blockquote>
+        <cite><strong>First workflow</strong>Email to order · pricing · stock check · approval</cite>
       </div>
       <div class="cta-panel">
-        <h3>Replace busywork with strategic work</h3>
-        <p>Deploy an AI coworker to handle the work that stands between you and the high-value analysis you were hired to do.</p>
-        <a class="btn btn-primary" href="#book">Book a demo</a>
+        <h3>Then expand from the same context</h3>
+        <p>Once Otira knows your SKUs, customers, pricing, and approval rules, invoice handling, replenishment, and reporting become easier to add.</p>
+        <a class="btn btn-primary" href="#uses">See use cases</a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="platform">
+<section class="integrations-section" id="integrations">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Integrations</span>
+      <h2>Connects to the tools your team already lives in.</h2>
+      <p class="lead">Otira works across email, accounting, ERP, inventory, spreadsheets, and wine-specific systems so work can move without another copy-paste handoff.</p>
+    </div>
+    <div class="integration-cloud" aria-label="Example tools Otira can connect to">
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/sap/0FAAFF" alt="" loading="lazy" />
+        <div class="integration-name">SAP Business One</div>
+        <div class="integration-type">ERP &amp; accounting</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/quickbooks/2CA01C" alt="" loading="lazy" />
+        <div class="integration-name">QuickBooks</div>
+        <div class="integration-type">Accounting</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=osas.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">Traverse ERP</div>
+        <div class="integration-type">Distribution ERP</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/gmail/EA4335" alt="" loading="lazy" />
+        <div class="integration-name">Gmail</div>
+        <div class="integration-type">Order inbox</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">Microsoft 365</div>
+        <div class="integration-type">Outlook &amp; Excel</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=sevenfifty.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">SevenFifty</div>
+        <div class="integration-type">Wine sales data</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=winedirect.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">WineDirect</div>
+        <div class="integration-type">Commerce &amp; orders</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=commerce7.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">Commerce7</div>
+        <div class="integration-type">DTC commerce</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=shipcompliant.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">ShipCompliant</div>
+        <div class="integration-type">Compliance</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=goekos.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">Ekos</div>
+        <div class="integration-type">Inventory &amp; production</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/sage/00D639" alt="" loading="lazy" />
+        <div class="integration-name">Sage</div>
+        <div class="integration-type">Accounting</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/googlesheets/34A853" alt="" loading="lazy" />
+        <div class="integration-name">Spreadsheets</div>
+        <div class="integration-type">Excel, Sheets, CSV</div>
+      </div>
+    </div>
+    <a class="integration-cta" href="#book">Map your first integration →</a>
+  </div>
+</section>
+
+<section id="platform" hidden>
   <div class="wrap">
     <div class="section-head">
       <span class="label-caps">Platform</span>
@@ -1332,7 +1828,7 @@
   </div>
 </section>
 
-<section id="ai" class="ai-section">
+<section id="ai" class="ai-section" hidden>
   <div class="wrap">
     <div class="section-head">
       <span class="label-caps">Otira Intelligence</span>
@@ -1386,49 +1882,49 @@
   </div>
 </section>
 
-<section id="uses">
+<section id="uses-old" hidden>
   <div class="wrap">
     <div class="section-head">
       <span class="label-caps">Use cases</span>
-      <h2>Power your processes with better, faster data.</h2>
-      <p class="lead">Unlock the confidence and process improvements you need to go from data to decision faster.</p>
+      <h2>Start with the work your team already does by hand.</h2>
+      <p class="lead">Each workflow is designed for human approval first. Otira prepares the work, shows the source, and lets your team stay in control.</p>
     </div>
     <div class="use-grid">
       <div class="use-card">
-        <h3>Financial reporting &amp; close</h3>
-        <p>Put routine reporting on autopilot — turning days of work into click-of-a-button tasks with full citations.</p>
+        <h3>Turn emails into orders</h3>
+        <p>A customer emails an order. Otira reads it, matches wine names, vintages, products, pricing, and stock, then prepares the order for approval.</p>
         <span class="use-link">Learn more</span>
       </div>
       <div class="use-card">
-        <h3>AI variance analysis</h3>
-        <p>Instantly understand the “why” behind every variance — drill-down included, not a black box.</p>
+        <h3>Handle vendor invoices</h3>
+        <p>Vendor invoices are captured, coded, matched to vendors or purchase orders, and queued for payment once you approve.</p>
         <span class="use-link">Learn more</span>
       </div>
       <div class="use-card">
-        <h3>Modeling &amp; forecasting</h3>
-        <p>Centralize models and assumptions. Keep building in spreadsheets with live sync to actuals.</p>
+        <h3>Keep inventory on track</h3>
+        <p>Otira watches cases, costs, vintages, and locations, then suggests reorders or drafts purchase orders before stock runs low.</p>
         <span class="use-link">Learn more</span>
       </div>
       <div class="use-card">
-        <h3>Collaborative budgeting</h3>
-        <p>Budget owners get answers in Slack without waiting on finance’s calendar.</p>
+        <h3>Watch the numbers</h3>
+        <p>Live views and alerts flag margin, cash, inventory, or sales changes before they become bigger problems.</p>
         <span class="use-link">Learn more</span>
       </div>
       <div class="use-card">
-        <h3>Headcount planning</h3>
-        <p>Connect HRIS, ATS, and headcount spreadsheets — reconcile cross-system data automatically.</p>
+        <h3>Answer team questions</h3>
+        <p>Sales, ops, and finance can ask about order status, stock availability, invoice history, or customer-specific pricing.</p>
         <span class="use-link">Learn more</span>
       </div>
       <div class="use-card">
-        <h3>Board &amp; investor relations</h3>
-        <p>Pull reports and presentations to keep stakeholders informed — always traceable to source.</p>
+        <h3>Prepare weekly reports</h3>
+        <p>Sales, inventory, cash, and margin updates are drafted with source links so owners spend less time building status reports.</p>
         <span class="use-link">Learn more</span>
       </div>
     </div>
   </div>
 </section>
 
-<section id="works">
+<section id="works" hidden>
   <div class="wrap">
     <div class="section-head">
       <span class="label-caps">Integrations</span>
@@ -1457,29 +1953,150 @@
   <div class="wrap">
     <div class="section-head">
       <span class="label-caps">Trust</span>
-      <h2>Fully-observable AI — not a black box.</h2>
-      <p class="lead">All the power of an AI coworker, with citations, approvals, and audit trails your compliance team can stand behind.</p>
+      <h2>It prepares work. Your team approves it.</h2>
+      <p class="lead">Wine businesses run on trust. Otira is designed around source links, confidence, and human approval before anything important changes.</p>
     </div>
     <div class="trust-grid">
       <ul class="check">
-        <li>Ask questions, get trusted answers, take action — with source links</li>
-        <li>Human approval before anything posts to SAP, QuickBooks, or Sage</li>
-        <li>Full audit log of every ask, answer, and write-back</li>
-        <li>Your data stays in your systems — we don't train on it</li>
+        <li>Every draft cites the email, invoice, spreadsheet, or system it came from</li>
+        <li>Human approval before orders, payments, or purchase orders are created</li>
+        <li>Confidence scores and exception queues for ambiguous products or pricing</li>
+        <li>Your data stays in your existing tools; Otira works on top</li>
       </ul>
       <div class="trust-card">
         <h3 style="margin-bottom:16px">Why not ChatGPT or a dashboard?</h3>
-        <p style="color:var(--ink-muted);font-size:15px;line-height:1.55;margin-bottom:8px">Generic AI isn't connected to live ERP data. Otira knows your chart, close process, and can queue approved write-backs — with a citation on every number.</p>
+        <p style="color:var(--ink-muted);font-size:15px;line-height:1.55;margin-bottom:8px">ChatGPT does not know your customer pricing, inventory, or approval rules. Dashboards show what happened, but do not turn an order email or invoice into approved work.</p>
         <div class="soc-badge">
-          <div class="soc-icon">SOC<br>2</div>
-          <span><strong>Enterprise-ready security</strong>SOC 2 Type I &amp; II · encryption at rest &amp; in transit</span>
+          <div class="soc-icon">OK</div>
+          <span><strong>Approval-first automation</strong>Start with review queues; add automation only after the workflow earns trust.</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="customers" class="testimonials">
+<section id="architecture" class="arch-section">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:40px;">
+      <span class="label-caps">Architecture</span>
+      <h2>The coworker between daily work and your systems.</h2>
+      <p class="lead" style="margin-bottom:0;">Otira sits between messy business inputs and the tools that run your company, carrying your product, pricing, inventory, and approval rules into every action.</p>
+    </div>
+    <div class="arch-diagram" role="img" aria-label="Otira workflow: business inputs on top, company rules in the middle, existing systems below">
+      <div class="arch-layer">
+        <div class="arch-layer-label">Daily<br>work</div>
+        <div class="arch-layer-body">
+          <div class="arch-row">
+            <div class="arch-box">
+              <div class="arch-box-title">Customer orders</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Email</span>
+                <span class="arch-icon">PDF</span>
+                <span class="arch-icon">EDI</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Vendor invoices</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Bills</span>
+                <span class="arch-icon">POs</span>
+                <span class="arch-icon">Terms</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Inventory moves</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Stock</span>
+                <span class="arch-icon">Cases</span>
+                <span class="arch-icon">Costs</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Team questions</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Slack</span>
+                <span class="arch-icon">Excel</span>
+                <span class="arch-icon">Email</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connectors" aria-hidden="true">
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+      </div>
+
+      <div class="arch-layer">
+        <div class="arch-layer-label highlight">Company<br>rules</div>
+        <div class="arch-layer-body arch-core-wrap">
+          <div class="arch-core-tabs" aria-hidden="true">
+            <span class="arch-core-tab">Products</span>
+            <span class="arch-core-tab">Customers</span>
+            <span class="arch-core-tab">Approvals</span>
+          </div>
+          <div class="arch-core">
+            <div class="arch-core-title">Otira <span>coworker</span></div>
+            <div class="arch-core-grid">
+              <div class="arch-core-cell">SKU and vintage map</div>
+              <div class="arch-core-cell">Trust &amp; approvals</div>
+              <div class="arch-core-cell">Pricing exceptions</div>
+              <div class="arch-core-cell">Inventory logic</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connectors" aria-hidden="true">
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+      </div>
+
+      <div class="arch-layer">
+        <div class="arch-layer-label">Your business<br>systems</div>
+        <div class="arch-layer-body">
+          <div class="arch-row">
+            <div class="arch-box">
+              <div class="arch-box-title">Accounting &amp; ERP</div>
+              <div class="arch-icons">
+                <span class="arch-icon">QBO</span>
+                <span class="arch-icon">Sage</span>
+                <span class="arch-icon">ERP</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Inventory</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Warehouse</span>
+                <span class="arch-icon">Sheets</span>
+                <span class="arch-icon">Lots</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Sales</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Email</span>
+                <span class="arch-icon">CRM</span>
+                <span class="arch-icon">Reps</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Files</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Drive</span>
+                <span class="arch-icon">Excel</span>
+                <span class="arch-icon">PDF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="customers" class="testimonials" hidden>
   <div class="wrap">
     <div class="section-head">
       <span class="label-caps">Real users, real results</span>
@@ -1536,7 +2153,7 @@
   </div>
 </section>
 
-<section class="persona-section">
+<section class="persona-section" hidden>
   <div class="wrap">
     <div class="persona-head">
       <h2>Everything finance teams love about Otira</h2>
@@ -1658,22 +2275,22 @@
       <h2>Questions</h2>
     </div>
     <div class="faq-grid">
-      <details class="faq-row"><summary>Do we have to replace SAP, QuickBooks, Sage, or our spreadsheets?</summary><p>No. Otira layers on top. Your ERP and models stay the system of record — we connect and sync, not migrate.</p></details>
-      <details class="faq-row"><summary>Which accounting systems do you support?</summary><p>SAP, QuickBooks, Sage, NetSuite, Xero, and more — plus Excel, Google Sheets, billing, HRIS, and data warehouse connectors.</p></details>
-      <details class="faq-row"><summary>Will it post entries without us?</summary><p>Never on anything material without approval. Otira prepares, cites, and queues — your team signs off before anything hits the ledger.</p></details>
-      <details class="faq-row"><summary>How is this different from Aleph or other FP&amp;A tools?</summary><p>Tools like Aleph excel at mid-market FP&amp;A platforms. Otira is forward-deployed for growing teams — hands-on setup, multi-ERP from day one, and a coworker that acts with your sign-off.</p></details>
-      <details class="faq-row"><summary>What does it cost?</summary><p>Less than adding another analyst — initiation for setup plus an ongoing retainer. We'll scope it on a demo call.</p></details>
+      <details class="faq-row"><summary>Do we have to replace our accounting, ERP, inventory tools, or spreadsheets?</summary><p>No. Otira layers on top of the tools your team already uses. The goal is less copying and checking, not a painful system migration.</p></details>
+      <details class="faq-row"><summary>What workflow should we start with?</summary><p>Start with one workflow that costs hours every week. For most wine importers and distributors, the best first candidate is customer order emails into approved draft orders.</p></details>
+      <details class="faq-row"><summary>Will Otira create orders or payments without us?</summary><p>No. The first version is approval-first: Otira prepares the draft, cites the source, flags uncertainty, and waits for your team.</p></details>
+      <details class="faq-row"><summary>How long does setup take?</summary><p>We map the workflow, connect the key systems, and prove the first use case on real data before expanding. The goal is weeks, not a multi-quarter transformation.</p></details>
+      <details class="faq-row"><summary>Is this only for wine?</summary><p>Wine is the first focus because the workflow is messy and underserved: vintages, allocations, distributors, inventory, and relationship-driven orders. The same pattern can expand later.</p></details>
     </div>
   </div>
 </section>
 
 <section id="book" class="cta-dark">
   <div class="wrap cta-dark-inner">
-    <h2>Make finance your competitive edge.</h2>
-    <p class="lead">Build a team people trust and a close process you can measure — all with one AI-native platform.</p>
+    <h2>Start with one workflow your team does by hand.</h2>
+    <p class="lead">We will map the order, invoice, inventory, or reporting process that slows your wine business down and show where an approval-first coworker can help.</p>
     <div class="cta-actions">
-      <a class="btn btn-primary" href="mailto:hello@otira.example?subject=Otira%20demo%20request">Book a demo</a>
-      <a class="btn btn-secondary" href="mailto:hello@otira.example">Contact us</a>
+      <a class="btn btn-primary" href="mailto:hello@otira.example?subject=Otira%20workflow%20mapping">Book a workflow mapping</a>
+      <a class="btn btn-secondary" href="#uses">Review use cases</a>
     </div>
   </div>
 </section>
@@ -1683,23 +2300,23 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="logo"><span class="logo-mark" aria-hidden="true">O</span>Otira</div>
-        <p>AI finance coworker for your teams. Connect SAP, QuickBooks, Sage, and the spreadsheets you already use.</p>
+        <p>AI coworkers for small wine importers and distributors. Turn messy back-office work into approved actions.</p>
       </div>
       <div class="footer-col">
-        <h4>Platform</h4>
-        <a href="#platform">Overview</a>
-        <a href="#works">Integrations</a>
-        <a href="#trust">Security</a>
+        <h4>Site</h4>
+        <a href="#integrations">Integrations</a>
+        <a href="#architecture">How it works</a>
+        <a href="#trust">Trust</a>
       </div>
       <div class="footer-col">
         <h4>Use cases</h4>
-        <a href="#uses">Reporting &amp; close</a>
-        <a href="#uses">Variance analysis</a>
-        <a href="#uses">Budgeting</a>
+        <a href="#uses">Emails to orders</a>
+        <a href="#uses">Vendor invoices</a>
+        <a href="#uses">Inventory tracking</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="#book">Book a demo</a>
+        <a href="#book">Book a workflow mapping</a>
         <a href="mailto:hello@otira.example">Contact</a>
       </div>
     </div>
@@ -1731,6 +2348,21 @@
   }
   initTabs('.tabs', 'tab-panel');
   initTabs('.persona-tabs', 'persona-panel');
+
+  var hero = document.querySelector('.hero');
+  if (hero) {
+    hero.addEventListener('pointermove', function (event) {
+      var rect = hero.getBoundingClientRect();
+      var x = ((event.clientX - rect.left) / rect.width) * 100;
+      var y = ((event.clientY - rect.top) / rect.height) * 100;
+      hero.style.setProperty('--hero-dot-x', x + '%');
+      hero.style.setProperty('--hero-dot-y', y + '%');
+      hero.style.setProperty('--hero-dot-hover', '1');
+    });
+    hero.addEventListener('pointerleave', function () {
+      hero.style.setProperty('--hero-dot-hover', '0');
+    });
+  }
 })();
 </script>
 
