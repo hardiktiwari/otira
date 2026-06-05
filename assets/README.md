@@ -8,6 +8,9 @@ Brand and visual assets — logo, favicon, colors, fonts, images used by the web
   `#6c8cff → #9d7bff → #7af0d0`; muted `#97a3c2`.
 - **Type:** system sans (Inter/SF). Clean, modern, high-contrast.
 
+## Architecture diagram
+- **`otira-context-layer-diagram.html`** — standalone three-layer context diagram (Otira-adapted; layout inspired by [Atlan](https://atlan.com/)'s enterprise model, customized for SMB finance). Also embedded on the website Platform section.
+
 ## TODO
 - [ ] Logo + favicon (wordmark is fine to start).
 - [ ] 1-line tagline locked (e.g., "Get your time back.").

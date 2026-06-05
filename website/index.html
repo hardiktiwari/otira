@@ -3,190 +3,2376 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Otira — AI coworkers for small businesses</title>
-<meta name="description" content="Otira sets up an AI assistant that plugs into the tools you already use, learns how your business runs, and does the repetitive work — so you get your time back." />
+<title>Otira — AI coworkers for wine importers and distributors</title>
+<meta name="description" content="Otira helps small wine importers and distributors turn order emails, vendor invoices, inventory updates, and sales reports into approved work inside the tools they already use." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  :root{
-    --bg:#0a0e1a; --bg2:#0f1525; --card:#151b2e; --card2:#1a2238;
-    --ink:#eef2fb; --muted:#97a3c2; --line:#283150;
-    --accent:#6c8cff; --accent2:#7af0d0;
-    --grad:linear-gradient(120deg,#6c8cff,#9d7bff 50%,#7af0d0);
-    /* glassmorphism tokens */
-    --glass-bg:rgba(255,255,255,.06);
-    --glass-bg-strong:rgba(255,255,255,.09);
-    --glass-border:rgba(255,255,255,.14);
-    --glass-blur:saturate(160%) blur(16px);
-    --glass-shadow:0 8px 32px rgba(2,6,23,.45), inset 0 1px 0 rgba(255,255,255,.08);
+  :root {
+    --ink: #111111;
+    --on-primary: #ffffff;
+    --ink-muted: #626260;
+    --ink-subtle: #7b7b78;
+    --ink-tertiary: #9c9fa5;
+    --canvas: #f5f1ec;
+    --surface-1: #ffffff;
+    --surface-2: #ebe7e1;
+    --inverse-canvas: #000000;
+    --inverse-ink: #ffffff;
+    --hairline: #d3cec6;
+    --hairline-soft: #ebe7e1;
+    --fin-orange: #ff5600;
+    --report-blue: #65b5ff;
+    --report-green: #0bdf50;
+    --report-pink: #ff2067;
+    --shadow-sm: 0 1px 2px rgba(17,17,17,0.04);
+    --shadow-md: 0 8px 32px rgba(17,17,17,0.06);
+    --shadow-lg: 0 24px 64px rgba(17,17,17,0.08);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+    --section: 120px;
+    --max: 1200px;
+    --font: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
-  /* ambient blobs so the frosted glass has color to refract */
-  body::before,body::after{content:"";position:fixed;z-index:-1;width:60vw;height:60vw;border-radius:50%;filter:blur(90px);opacity:.45;pointer-events:none}
-  body::before{top:-20vw;right:-10vw;background:radial-gradient(circle at center,#6c8cff,transparent 65%)}
-  body::after{bottom:-25vw;left:-15vw;background:radial-gradient(circle at center,#7af0d0,transparent 60%)}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-  header{position:sticky;top:0;z-index:20;-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);background:rgba(10,14,26,.55);border-bottom:1px solid var(--glass-border)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{font-weight:800;letter-spacing:-.02em;font-size:20px}
-  .logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .nav a.cta{background:var(--grad);color:#0a0e1a;font-weight:700;padding:9px 16px;border-radius:10px;font-size:14px}
-  .nav .links{display:flex;gap:22px;align-items:center;font-size:14px;color:var(--muted)}
-  .nav .links a:hover{color:var(--ink)}
-  section{padding:84px 0;border-bottom:1px solid var(--line)}
-  .hero{padding:96px 0 88px;background:radial-gradient(800px 460px at 80% -10%,rgba(108,140,255,.15),transparent 60%),radial-gradient(700px 460px at 0% 110%,rgba(122,240,208,.08),transparent 55%)}
-  h1{font-size:clamp(36px,5.5vw,64px);line-height:1.05;letter-spacing:-.025em;font-weight:800;max-width:17ch}
-  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .sub{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:60ch;margin:22px 0 34px}
-  .btn{display:inline-block;background:var(--grad);color:#0a0e1a;font-weight:700;padding:14px 26px;border-radius:12px;font-size:16px}
-  .btn.ghost{background:var(--glass-bg);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);color:var(--ink);border:1px solid var(--glass-border);margin-left:10px}
-  h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.02em;font-weight:800;margin-bottom:14px}
-  .lead{color:var(--muted);max-width:60ch;margin-bottom:40px;font-size:17px}
-  .grid{display:grid;gap:18px}
-  .g3{grid-template-columns:repeat(3,1fr)}
-  .g2{grid-template-columns:repeat(2,1fr)}
-  .card{background:var(--glass-bg);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:16px;padding:24px;box-shadow:var(--glass-shadow);transition:transform .2s ease,border-color .2s ease,background .2s ease}
-  .card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.24);background:var(--glass-bg-strong)}
-  .card .n{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.08em}
-  .card h3{font-size:17px;margin:10px 0 8px;font-weight:700}
-  .card p{color:var(--muted);font-size:15px}
-  .check li{list-style:none;padding-left:28px;position:relative;margin-bottom:14px;font-size:16px}
-  .check li::before{content:"✓";position:absolute;left:0;color:var(--accent2);font-weight:800}
-  .x li{list-style:none;padding-left:28px;position:relative;margin-bottom:12px;color:var(--muted)}
-  .x li::before{content:"✕";position:absolute;left:0;color:#e0708a;font-weight:800}
-  details{border:1px solid var(--glass-border);border-radius:12px;padding:16px 18px;margin-bottom:12px;background:var(--glass-bg);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);box-shadow:var(--glass-shadow)}
-  summary{cursor:pointer;font-weight:600;font-size:16px}
-  details p{color:var(--muted);margin-top:10px}
-  .cta-band{text-align:center;background:radial-gradient(700px 300px at 50% 0%,rgba(108,140,255,.14),transparent 60%)}
-  footer{padding:40px 0;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-  .tag{display:inline-block;font-size:13px;color:var(--muted);background:var(--glass-bg);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:999px;padding:7px 14px;margin:4px 6px 4px 0}
-  .stats{padding:0}
-  .stats .wrap{margin-top:-44px;position:relative;z-index:2}
-  .statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .stat{text-align:center;padding:26px 18px;border-radius:16px;background:var(--glass-bg);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);box-shadow:var(--glass-shadow)}
-  .stat .num{font-size:clamp(26px,3.4vw,34px);font-weight:800;letter-spacing:-.02em;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .stat .lbl{color:var(--muted);font-size:14px;margin-top:6px}
-  .logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-  .eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-  @media(max-width:820px){.g3,.g2,.statgrid{grid-template-columns:1fr}.nav .links{display:none}.stats .wrap{margin-top:24px}}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--canvas);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+  /* dotted grid — Aleph signature */
+  .dot-grid {
+    background-image: radial-gradient(circle, var(--hairline) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .dot-grid-fade {
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  }
+
+  /* nav */
+  header {
+    position: sticky; top: 0; z-index: 30;
+    background: rgba(245, 241, 236, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--hairline-soft);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px; gap: 24px;
+  }
+  .logo {
+    font-size: 20px; font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+  .logo-mark {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; margin-right: 8px;
+    background: var(--ink); color: var(--on-primary);
+    border-radius: 6px; font-size: 14px; font-weight: 600;
+    vertical-align: middle;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 32px;
+    font-size: 14px; font-weight: 500; color: var(--ink-muted);
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 15px; font-weight: 500; line-height: 1.2;
+    padding: 11px 20px; border-radius: var(--radius-md);
+    border: none; cursor: pointer;
+    transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--on-primary);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-primary:hover {
+    background: var(--inverse-canvas);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    background: var(--surface-1); color: var(--ink);
+    border: 1px solid var(--hairline);
+  }
+  .btn-secondary:hover { border-color: var(--ink-subtle); background: var(--surface-1); }
+  .btn-ghost {
+    background: transparent; color: var(--ink-muted);
+    padding: 11px 14px;
+  }
+  .btn-ghost:hover { color: var(--ink); }
+
+  /* typography */
+  .label-caps {
+    display: block;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-tertiary); margin-bottom: 16px;
+  }
+  .badge-ai {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 500; color: var(--fin-orange);
+    background: rgba(255, 86, 0, 0.08);
+    padding: 7px 14px; border-radius: 999px;
+    margin-bottom: 24px;
+  }
+  .badge-ai::before {
+    content: ""; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--fin-orange);
+    box-shadow: 0 0 0 3px rgba(255, 86, 0, 0.2);
+  }
+  .rating-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--ink-muted);
+    margin-top: 32px; padding-top: 32px;
+    border-top: 1px solid var(--hairline-soft);
+  }
+  .rating-pill strong { color: var(--ink); font-weight: 600; }
+  .stars { color: var(--fin-orange); letter-spacing: 2px; }
+
+  h1 {
+    font-size: clamp(44px, 5.5vw, 76px);
+    font-weight: 500; line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+  h1 .line { display: block; }
+  h2 {
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 500; line-height: 1.1;
+    letter-spacing: -0.025em; margin-bottom: 20px;
+  }
+  h3 {
+    font-size: 22px; font-weight: 500; line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+  .subhead {
+    font-size: clamp(18px, 2vw, 21px);
+    line-height: 1.55; color: var(--ink-muted);
+    max-width: 48ch; margin: 28px 0 36px;
+    letter-spacing: -0.01em;
+  }
+  .lead {
+    font-size: 18px; line-height: 1.55; color: var(--ink-muted);
+    max-width: 54ch; margin-bottom: 48px;
+    letter-spacing: -0.01em;
+  }
+  .section-head { max-width: 640px; margin-bottom: 64px; }
+
+  section { padding: var(--section) 0; }
+  section + section { border-top: 1px solid var(--hairline-soft); }
+
+  /* hero */
+  .hero {
+    padding-top: 80px; padding-bottom: 48px;
+    position: relative; overflow: hidden;
+    --hero-dot-x: 50%;
+    --hero-dot-y: 50%;
+    --hero-dot-hover: 0;
+  }
+  .hero::before,
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(17,17,17,0.11) 1px, transparent 1.2px);
+    background-size: 24px 24px;
+    background-position: center top;
+    pointer-events: none;
+  }
+  .hero::before {
+    mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(180deg, black 0%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%),
+      linear-gradient(180deg, black 0%, black 90%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+  }
+  .hero::after {
+    background-image: radial-gradient(circle, rgba(255,86,0,0.65) 1px, transparent 1.25px);
+    opacity: var(--hero-dot-hover);
+    mask-image: radial-gradient(circle 180px at var(--hero-dot-x) var(--hero-dot-y), black 0%, transparent 72%);
+    -webkit-mask-image: radial-gradient(circle 180px at var(--hero-dot-x) var(--hero-dot-y), black 0%, transparent 72%);
+    transition: opacity 0.16s ease;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid; grid-template-columns: 1.15fr 0.8fr;
+    gap: 64px; align-items: center;
+  }
+  .hero-copy { max-width: 560px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* product mockup — premium depth */
+  .mockup-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    justify-self: end;
+    padding: 24px;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+  }
+  .mockup-wrap::after {
+    content: ""; position: absolute; inset: -1px; z-index: -1;
+    border-radius: calc(var(--radius-2xl) + 1px);
+    background: linear-gradient(135deg, var(--hairline-soft), transparent 60%);
+  }
+  .mockup-chrome {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 20px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--hairline-soft);
+  }
+  .mockup-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--hairline); }
+  .mockup-title { font-size: 12px; font-weight: 500; color: var(--ink-muted); margin-left: 10px; letter-spacing: 0.02em; }
+  .mockup-body { font-family: var(--mono); font-size: 12px; }
+  .mockup-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 12px 0; border-bottom: 1px solid var(--hairline-soft);
+  }
+  .mockup-row:last-of-type { border-bottom: none; }
+  .mockup-label { color: var(--ink-muted); font-family: var(--font); font-size: 13px; }
+  .mockup-value { font-weight: 500; font-size: 13px; }
+  .mockup-value.down { color: var(--report-pink); }
+  .mockup-value.up { color: var(--report-green); }
+  .mockup-variance {
+    margin: 16px 0; padding: 14px 16px;
+    background: var(--canvas); border-radius: var(--radius-md);
+    border-left: 3px solid var(--fin-orange);
+    font-family: var(--font); font-size: 13px; line-height: 1.5;
+    color: var(--ink-muted);
+  }
+  .mockup-variance strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .mockup-cite {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 14px; font-size: 11px; font-weight: 500;
+    color: var(--report-blue); font-family: var(--font);
+    background: rgba(101, 181, 255, 0.1);
+    padding: 5px 10px; border-radius: 999px;
+  }
+  .mockup-chart {
+    display: flex; align-items: flex-end; gap: 10px;
+    height: 88px; margin: 20px 0 4px;
+  }
+  .mockup-bar {
+    flex: 1; border-radius: 6px 6px 0 0;
+    background: var(--hairline-soft); min-height: 24px;
+  }
+  .mockup-bar.hi { background: var(--report-blue); height: 100%; }
+  .mockup-bar.mid { height: 62%; }
+  .mockup-bar.lo { height: 38%; }
+  .mockup-ask {
+    margin-top: 18px; padding: 14px 16px;
+    background: var(--ink); color: rgba(255,255,255,0.7);
+    border-radius: var(--radius-md);
+    font-family: var(--font); font-size: 13px;
+  }
+  .mockup-ask strong { color: var(--on-primary); font-weight: 500; }
+  .task-composer {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 14px 16px; margin-bottom: 14px;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    font-family: var(--font);
+  }
+  .task-composer span { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .task-plus {
+    width: 34px; height: 34px; flex: 0 0 34px;
+    display: grid; place-items: center;
+    border-radius: 50%; background: var(--ink); color: var(--on-primary);
+    font-size: 20px; line-height: 1;
+  }
+  .task-list {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    padding: 10px 14px;
+    font-family: var(--font);
+  }
+  .task-item {
+    display: grid; grid-template-columns: 18px 1fr;
+    gap: 12px; padding: 13px 0;
+    border-bottom: 1px solid var(--hairline-soft);
+  }
+  .task-item:last-child { border-bottom: none; }
+  .task-check {
+    width: 14px; height: 14px; margin-top: 3px;
+    border: 1px solid var(--hairline); border-radius: 4px;
+    background: var(--surface-1);
+  }
+  .task-check.active { background: var(--ink); border-color: var(--ink); }
+  .task-title { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .task-note { display: block; font-size: 12px; line-height: 1.45; color: var(--ink-muted); }
+  .task-note strong { color: var(--fin-orange); font-weight: 500; }
+  .task-note .blue { color: var(--report-blue); font-weight: 500; }
+  .task-done { color: var(--ink-subtle); text-decoration: line-through; }
+
+  /* value props — Aleph 3-up + quote */
+  .value-section { padding-bottom: var(--section); }
+  .value-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; margin-bottom: 48px;
+  }
+  .value-card {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .value-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .value-card h3 { margin-bottom: 12px; font-size: 20px; }
+  .value-card p { font-size: 15px; color: var(--ink-muted); line-height: 1.55; }
+
+  /* integrations */
+  .integrations-section { padding-top: 0; text-align: center; }
+  .integration-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 980px;
+    margin: 36px auto 0;
+    padding: 6px 0;
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+  .integration-tile {
+    min-height: 0;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline-soft);
+    border-radius: 999px;
+    padding: 10px 16px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    box-shadow: var(--shadow-sm);
+  }
+  .integration-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    border-radius: 4px;
+    flex: 0 0 18px;
+  }
+  .integration-name { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .integration-type { display: none; }
+  .integration-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 28px;
+    padding: 12px 18px;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: var(--surface-1);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  @media (max-width: 1024px) {
+    .integration-cloud {
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+  }
+
+  .quote-featured {
+    display: grid; grid-template-columns: 1.2fr 1fr;
+    gap: 24px; align-items: stretch;
+  }
+  .quote-dark {
+    background: var(--inverse-canvas); color: var(--inverse-ink);
+    border-radius: var(--radius-xl);
+    padding: 40px 44px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .quote-dark::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+  }
+  .quote-dark blockquote {
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 500; line-height: 1.35;
+    letter-spacing: -0.02em; position: relative;
+  }
+  .quote-dark cite {
+    display: block; margin-top: 24px;
+    font-size: 14px; font-style: normal;
+    color: var(--ink-tertiary); position: relative;
+  }
+  .quote-dark cite strong { display: block; color: rgba(255,255,255,0.85); font-weight: 500; margin-bottom: 2px; }
+  .cta-panel {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    padding: 40px 44px;
+    display: flex; flex-direction: column; justify-content: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .cta-panel h3 { margin-bottom: 12px; font-size: 24px; }
+  .cta-panel p { color: var(--ink-muted); margin-bottom: 24px; line-height: 1.55; }
+
+  /* platform rows — alternating Aleph layout */
+  .platform-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: center;
+    padding: 80px 0;
+    border-bottom: 1px solid var(--hairline-soft);
+  }
+  .platform-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .platform-row.reverse .platform-copy { order: 2; }
+  .platform-row.reverse .platform-visual { order: 1; }
+  .platform-copy .label-caps { color: var(--ink-subtle); }
+  .platform-copy h3 {
+    font-size: clamp(26px, 2.8vw, 36px);
+    margin-bottom: 16px; letter-spacing: -0.02em;
+  }
+  .platform-copy p {
+    font-size: 17px; color: var(--ink-muted);
+    line-height: 1.6; margin-bottom: 24px; max-width: 44ch;
+  }
+  .platform-copy p.secondary {
+    font-size: 15px; margin-bottom: 0;
+    padding-top: 16px; border-top: 1px solid var(--hairline-soft);
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .tag {
+    font-size: 12px; font-weight: 500; color: var(--ink-muted);
+    background: var(--canvas); border: 1px solid var(--hairline-soft);
+    padding: 6px 12px; border-radius: 999px;
+  }
+
+  /* integration hub diagram */
+  .hub {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-2xl);
+    padding: 48px 40px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+  }
+  .hub-tiers { display: flex; flex-direction: column; gap: 20px; }
+  .hub-row {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  }
+  .hub-pill {
+    font-size: 12px; font-weight: 500; color: var(--ink-muted);
+    background: var(--canvas);
+    border: 1px solid var(--hairline-soft);
+    padding: 10px 16px; border-radius: var(--radius-md);
+  }
+  .hub-connector {
+    display: flex; justify-content: center; gap: 4px; padding: 8px 0;
+  }
+  .hub-line {
+    width: 1px; height: 28px; background: var(--hairline);
+    margin: 0 auto;
+  }
+  .hub-core {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 56px; height: 56px;
+    background: var(--ink); color: var(--on-primary);
+    border-radius: 14px; font-weight: 600; font-size: 18px;
+    box-shadow: var(--shadow-md);
+    margin: 8px auto;
+  }
+
+  /* context layer architecture (Otira-adapted) */
+  .arch-section {
+    position: relative;
+    overflow: hidden;
+    padding-top: var(--section);
+  }
+  .arch-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(17,17,17,0.12) 1px, transparent 1.2px);
+    background-size: 18px 18px;
+    background-position: center top;
+    mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%),
+      linear-gradient(180deg, black 0%, black 76%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%),
+      linear-gradient(180deg, black 0%, black 76%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+    pointer-events: none;
+  }
+  .arch-section > .wrap {
+    position: relative;
+    z-index: 1;
+  }
+  .arch-diagram {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-2xl);
+    padding: 40px 32px 36px;
+    overflow: hidden;
+  }
+  .arch-layer {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    align-items: stretch;
+  }
+  .arch-layer + .arch-layer { margin-top: 28px; }
+  .arch-layer-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-tertiary);
+    padding-top: 18px;
+    line-height: 1.4;
+  }
+  .arch-layer-label.highlight { color: var(--report-blue); }
+  .arch-layer-body { min-width: 0; }
+  .arch-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .arch-box {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-lg);
+    padding: 16px 14px 14px;
+    min-height: 112px;
+    display: flex;
+    flex-direction: column;
+  }
+  .arch-box-title {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .arch-icons {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: auto;
+  }
+  .arch-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 34px; height: 28px; padding: 0 8px;
+    background: var(--canvas);
+    border: 1px solid var(--hairline-soft);
+    border-radius: 6px;
+    font-size: 10px; font-weight: 600;
+    color: var(--ink-muted);
+    letter-spacing: -0.01em;
+  }
+  .arch-icon.otira {
+    background: var(--ink); color: var(--on-primary);
+    border-color: var(--ink);
+  }
+  .arch-connectors {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 10px 0 6px;
+  }
+  .arch-connector {
+    display: flex; justify-content: center;
+  }
+  .arch-connector::before {
+    content: "";
+    width: 1px; height: 24px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--hairline) 0 4px,
+      transparent 4px 8px
+    );
+  }
+  .arch-core-wrap { position: relative; }
+  .arch-core-tabs {
+    display: flex; justify-content: center; gap: 8px;
+    margin-bottom: -1px; position: relative; z-index: 2;
+  }
+  .arch-core-tab {
+    font-size: 9px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-muted);
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 6px 12px;
+  }
+  .arch-core {
+    border: 1.5px solid var(--report-blue);
+    border-radius: var(--radius-xl);
+    background: var(--surface-1);
+    padding: 18px 16px 16px;
+  }
+  .arch-core-title {
+    text-align: center;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .arch-core-title span { color: var(--report-blue); }
+  .arch-core-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .arch-core-cell {
+    background: var(--canvas);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-md);
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.35;
+    min-height: 64px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  @media (max-width: 1024px) {
+    .arch-layer { grid-template-columns: 1fr; gap: 10px; }
+    .arch-layer-label { padding-top: 0; }
+    .arch-row, .arch-connectors, .arch-core-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .arch-diagram { padding: 24px 16px; }
+    .arch-row, .arch-connectors, .arch-core-grid { grid-template-columns: 1fr; }
+    .arch-core-tabs { flex-wrap: wrap; }
+  }
+
+  /* setup cards */
+  .setup-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 34px;
+    margin: 8px 0 42px;
+  }
+  .setup-grid::before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: 18px;
+    right: 18px;
+    height: 1px;
+    background: var(--hairline);
+  }
+  .setup-card {
+    position: relative;
+    z-index: 1;
+    padding: 0;
+    background: transparent;
+  }
+  .setup-visual {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--report-green);
+    border: 1px solid var(--report-green);
+    box-shadow: 0 0 0 8px var(--canvas);
+  }
+  .setup-card:nth-child(2) .setup-visual {
+    background: var(--report-blue);
+    border-color: var(--report-blue);
+  }
+  .setup-card:nth-child(3) .setup-visual {
+    background: var(--fin-orange);
+    border-color: var(--fin-orange);
+  }
+  .setup-icon {
+    width: auto;
+    height: auto;
+    display: grid;
+    place-items: center;
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    color: var(--on-primary);
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: none;
+  }
+  .setup-body { padding: 0; }
+  .setup-body h3 {
+    font-size: 18px;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .setup-body p {
+    color: var(--ink-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  @media (max-width: 900px) {
+    .setup-grid { grid-template-columns: 1fr; gap: 24px; }
+    .setup-grid::before {
+      top: 16px;
+      bottom: 16px;
+      left: 16px;
+      right: auto;
+      width: 1px;
+      height: auto;
+    }
+    .setup-card {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .setup-visual { margin-bottom: 0; }
+  }
+
+  /* mini UI panels for platform visuals */
+  .ui-panel {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .ui-panel-head {
+    padding: 14px 18px; border-bottom: 1px solid var(--hairline-soft);
+    font-size: 12px; font-weight: 500; color: var(--ink-muted);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .ui-panel-body { padding: 18px; font-size: 13px; }
+  .ui-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .ui-table th {
+    text-align: left; font-weight: 500; color: var(--ink-tertiary);
+    padding: 8px 10px; border-bottom: 1px solid var(--hairline-soft);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .ui-table td {
+    padding: 10px; border-bottom: 1px solid var(--hairline-soft);
+    color: var(--ink-muted);
+  }
+  .ui-table td.num { text-align: right; font-family: var(--mono); color: var(--ink); font-weight: 500; }
+  .ui-table tr:last-child td { border-bottom: none; }
+  .ui-table .neg { color: var(--report-pink); }
+  .ui-table .pos { color: var(--report-green); }
+
+  /* use cases */
+  .use-showcase {
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 28px;
+  }
+  .use-flow {
+    display: grid;
+    gap: 14px;
+  }
+  .flow-step {
+    position: relative;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .flow-step::before {
+    content: attr(data-step);
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--on-primary);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .flow-step h3 { font-size: 18px; margin-bottom: 8px; }
+  .flow-step p { font-size: 14px; color: var(--ink-muted); line-height: 1.5; }
+  .use-live-card {
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255, 86, 0, 0.12), transparent 28%),
+      radial-gradient(circle at 80% 20%, rgba(101, 181, 255, 0.18), transparent 32%),
+      var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-2xl);
+    padding: 24px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .use-live-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: var(--ink-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .use-live-kicker::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--report-green);
+  }
+  .mini-task {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 0;
+    border-top: 1px solid var(--hairline-soft);
+  }
+  .mini-task:first-of-type { border-top: none; }
+  .mini-task-icon {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--canvas);
+    font-size: 16px;
+  }
+  .mini-task-title { display: block; font-size: 14px; font-weight: 600; color: var(--ink); }
+  .mini-task-note { display: block; margin-top: 3px; font-size: 12px; color: var(--ink-muted); line-height: 1.4; }
+  .mini-task-status {
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--canvas);
+    color: var(--ink-muted);
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .use-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .use-card {
+    position: relative;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+    min-height: 118px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    overflow: hidden;
+  }
+  .use-card:hover,
+  .use-card:focus-within {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .use-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    background: var(--canvas);
+    font-size: 14px;
+  }
+  .use-card h3 { margin-bottom: 0; font-size: 18px; line-height: 1.25; }
+  .use-card p {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.45;
+    transition: max-height 0.22s ease, opacity 0.18s ease, margin 0.22s ease;
+  }
+  .use-card:hover p,
+  .use-card:focus-within p {
+    max-height: 120px;
+    opacity: 1;
+    margin: 10px 0 14px;
+  }
+  .use-link {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    font-size: 13px; font-weight: 600; color: var(--ink);
+    display: inline-flex; align-items: center; gap: 4px;
+    transition: max-height 0.22s ease, opacity 0.18s ease;
+  }
+  .use-card:hover .use-link,
+  .use-card:focus-within .use-link {
+    max-height: 24px;
+    opacity: 1;
+  }
+  .use-link::after { content: "→"; transition: transform 0.15s; }
+  .use-card:hover .use-link::after { transform: translateX(3px); }
+  @media (max-width: 900px) {
+    .use-showcase { grid-template-columns: 1fr; }
+    .use-grid { grid-template-columns: 1fr; }
+  }
+
+  /* testimonials — Aleph grid */
+  .testimonials { background: var(--surface-1); border: none; }
+  .testimonial-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .testimonial {
+    background: var(--canvas);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 200px;
+  }
+  .testimonial p {
+    font-size: 15px; line-height: 1.55; color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .testimonial footer {
+    margin-top: 20px; padding: 0; font-size: 13px; color: var(--ink-muted);
+  }
+  .testimonial footer strong { display: block; color: var(--ink); font-weight: 500; margin-bottom: 2px; }
+
+  /* trust */
+  .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .check { list-style: none; }
+  .check li {
+    position: relative; padding-left: 32px;
+    margin-bottom: 18px; font-size: 17px; line-height: 1.45;
+  }
+  .check li::before {
+    content: ""; position: absolute; left: 0; top: 6px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(11, 223, 80, 0.12);
+    border: 1.5px solid var(--report-green);
+  }
+  .check li::after {
+    content: "✓"; position: absolute; left: 5px; top: 7px;
+    font-size: 10px; color: var(--report-green); font-weight: 700;
+  }
+  .trust-card {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+  }
+  .soc-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-top: 32px; padding: 16px 20px;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+  }
+  .soc-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--canvas); border: 1px solid var(--hairline);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: var(--ink-muted);
+    text-align: center; line-height: 1.1;
+  }
+  .soc-badge span { font-size: 13px; color: var(--ink-muted); }
+  .soc-badge strong { display: block; color: var(--ink); font-weight: 500; font-size: 14px; }
+
+  /* faq */
+  .faq-grid { max-width: 720px; }
+  .faq-row {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-lg);
+    padding: 22px 28px; margin-bottom: 10px;
+    box-shadow: var(--shadow-sm);
+  }
+  .faq-row summary {
+    cursor: pointer; font-weight: 500; font-size: 16px;
+    list-style: none; letter-spacing: -0.01em;
+  }
+  .faq-row summary::-webkit-details-marker { display: none; }
+  .faq-row p { margin-top: 14px; color: var(--ink-muted); font-size: 15px; line-height: 1.55; }
+
+  /* final cta — dark band */
+  .cta-dark {
+    background: var(--inverse-canvas); color: var(--inverse-ink);
+    border: none; padding: 100px 0;
+    position: relative; overflow: hidden;
+  }
+  .cta-dark::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .cta-dark-inner {
+    position: relative; text-align: center; max-width: 640px; margin: 0 auto;
+  }
+  .cta-dark h2 { color: var(--inverse-ink); margin-bottom: 16px; }
+  .cta-dark .lead { color: rgba(255,255,255,0.65); margin: 0 auto 36px; }
+  .cta-dark .btn-primary { background: var(--on-primary); color: var(--ink); }
+  .cta-dark .btn-primary:hover { background: var(--surface-2); }
+  .cta-dark .btn-secondary {
+    background: transparent; color: var(--inverse-ink);
+    border-color: rgba(255,255,255,0.25);
+  }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+  /* footer */
+  footer {
+    padding: 80px 0 48px;
+    font-size: 13px; color: var(--ink-muted);
+    border-top: 1px solid var(--hairline-soft);
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: 48px; margin-bottom: 64px;
+  }
+  .footer-brand p { margin-top: 16px; max-width: 28ch; line-height: 1.55; font-size: 14px; }
+  .footer-col h4 {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-tertiary); margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block; font-size: 14px; color: var(--ink-muted);
+    margin-bottom: 10px;
+  }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+    padding-top: 32px; border-top: 1px solid var(--hairline-soft);
+    font-size: 12px;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-inner, .platform-row, .quote-featured { grid-template-columns: 1fr; }
+    .mockup-wrap { justify-self: center; max-width: 380px; }
+    .platform-row.reverse .platform-copy,
+    .platform-row.reverse .platform-visual { order: unset; }
+    .value-grid, .use-grid, .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .pillars, .bento { grid-template-columns: 1fr; }
+    .bento-card.wide { grid-column: span 1; }
+    .tab-panel.active { grid-template-columns: 1fr; }
+    .enterprise-card { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    :root { --section: 80px; }
+    .wrap { padding: 0 20px; }
+    .nav-links { display: none; }
+    .value-grid, .use-grid, .testimonial-grid, .trust-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    h1 { letter-spacing: -0.025em; }
+  }
+  /* ── Webflow patterns ── */
+  .announce-bar {
+    background: var(--ink); color: var(--on-primary);
+    font-size: 13px; font-weight: 500; text-align: center;
+    padding: 10px 24px;
+  }
+  .announce-bar a {
+    color: var(--on-primary); text-decoration: underline;
+    text-underline-offset: 3px; margin-left: 6px;
+  }
+  .announce-bar .new-badge {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--fin-orange); color: var(--on-primary);
+    padding: 2px 8px; border-radius: 4px; margin-right: 8px;
+    text-decoration: none;
+  }
+
+  .logo-strip {
+    padding: 40px 0 56px;
+    border-bottom: 1px solid var(--hairline-soft);
+  }
+  .logo-strip-label {
+    text-align: center; font-size: 13px; font-weight: 500;
+    color: var(--ink-tertiary); margin-bottom: 28px;
+    letter-spacing: 0.02em;
+  }
+  .marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+  .marquee-track {
+    display: flex; align-items: center; gap: 56px;
+    width: max-content;
+    animation: marquee 35s linear infinite;
+  }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .marquee-logo {
+    font-size: 15px; font-weight: 600; color: var(--ink-subtle);
+    letter-spacing: -0.02em; white-space: nowrap; opacity: 0.7;
+  }
+
+  .link-arrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 15px; font-weight: 500; color: var(--ink);
+    transition: gap 0.15s ease;
+  }
+  .link-arrow:hover { gap: 10px; }
+  .link-arrow::after { content: "→"; }
+
+  .pillars {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-bottom: 80px;
+  }
+  .pillar {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    padding: 36px 32px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex; flex-direction: column;
+    min-height: 280px;
+  }
+  .pillar:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .pillar h3 { font-size: 24px; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .pillar p { font-size: 15px; color: var(--ink-muted); line-height: 1.55; flex: 1; margin-bottom: 24px; }
+  .pillar-visual {
+    height: 120px; background: var(--canvas);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--hairline-soft);
+    margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--ink-tertiary); font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+
+  /* metric carousel — Webflow customer stories */
+  .metric-scroll {
+    display: flex; gap: 16px;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    padding: 4px 4px 24px;
+    scrollbar-width: none;
+  }
+  .metric-scroll::-webkit-scrollbar { display: none; }
+  .metric-card {
+    flex: 0 0 min(360px, 85vw);
+    scroll-snap-align: start;
+    background: var(--canvas);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-xl);
+    padding: 32px 28px;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .metric-card:hover {
+    border-color: var(--hairline);
+    box-shadow: var(--shadow-md);
+  }
+  .metric-card-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .metric-company {
+    font-size: 13px; font-weight: 600; color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+  .metric-stat {
+    font-size: clamp(40px, 4vw, 56px);
+    font-weight: 500; line-height: 1;
+    letter-spacing: -0.04em; color: var(--ink);
+  }
+  .metric-label {
+    font-size: 14px; color: var(--ink-muted); margin-top: 6px;
+    line-height: 1.4; max-width: 20ch;
+  }
+  .metric-card blockquote {
+    font-size: 15px; line-height: 1.55; color: var(--ink);
+    letter-spacing: -0.01em; margin-bottom: 20px;
+  }
+  .metric-card footer {
+    padding: 0; font-size: 13px; color: var(--ink-muted);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .metric-card footer strong { display: block; color: var(--ink); font-weight: 500; }
+
+  /* tabbed AI — Webflow Build/Manage/Optimize */
+  .ai-section { background: var(--surface-1); border: none; }
+  .tabs {
+    display: flex; gap: 4px; margin-bottom: 40px;
+    background: var(--canvas); border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-lg); padding: 4px;
+    width: fit-content; flex-wrap: wrap;
+  }
+  .tab-btn {
+    font-family: var(--font); font-size: 14px; font-weight: 500;
+    padding: 10px 20px; border: none; border-radius: var(--radius-md);
+    background: transparent; color: var(--ink-muted); cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .tab-btn[aria-selected="true"] {
+    background: var(--surface-1); color: var(--ink);
+    box-shadow: var(--shadow-sm);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .tab-panel h3 { font-size: clamp(26px, 2.8vw, 36px); margin-bottom: 16px; }
+  .tab-panel p { font-size: 17px; color: var(--ink-muted); line-height: 1.6; margin-bottom: 24px; }
+  .tab-list { list-style: none; }
+  .tab-list li {
+    padding: 14px 0; border-bottom: 1px solid var(--hairline-soft);
+    font-size: 15px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .tab-list li:last-child { border-bottom: none; }
+  .tab-list a { color: var(--ink); font-weight: 500; }
+
+  /* persona switcher */
+  .persona-section { background: var(--canvas); }
+  .persona-head {
+    text-align: center; max-width: 720px; margin: 0 auto 48px;
+  }
+  .persona-head h2 { margin-bottom: 24px; }
+  .persona-tabs {
+    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .persona-btn {
+    font-family: var(--font); font-size: 14px; font-weight: 500;
+    padding: 10px 18px; border-radius: 999px;
+    border: 1px solid var(--hairline); background: var(--surface-1);
+    color: var(--ink-muted); cursor: pointer;
+    transition: all 0.15s;
+  }
+  .persona-btn[aria-selected="true"] {
+    background: var(--ink); color: var(--on-primary); border-color: var(--ink);
+  }
+  .persona-panel { display: none; }
+  .persona-panel.active { display: block; }
+  .bento {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .bento-card {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s;
+  }
+  .bento-card:hover { box-shadow: var(--shadow-md); }
+  .bento-card.wide { grid-column: span 2; }
+  .bento-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 12px;
+  }
+  .bento-card h4 { font-size: 18px; font-weight: 500; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .bento-card p { font-size: 14px; color: var(--ink-muted); line-height: 1.5; margin-bottom: 12px; }
+
+  .enterprise-card {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 32px; align-items: center;
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-xl);
+    padding: 32px 40px;
+    margin-top: 64px;
+    box-shadow: var(--shadow-sm);
+  }
+  .enterprise-card h3 { font-size: 20px; margin-bottom: 6px; }
+  .enterprise-card p { font-size: 15px; color: var(--ink-muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn, .value-card, .use-card, .pillar { transition: none; }
+    .marquee-track { animation: none; }
+  }
 </style>
 </head>
 <body>
-<header><div class="wrap nav">
-  <div class="logo"><b>Otira</b></div>
-  <div class="links">
-    <a href="#how">How it works</a>
-    <a href="#uses">Use cases</a>
-    <a href="#works">Integrations</a>
-    <a href="#trust">Trust</a>
-    <a href="#faq">FAQ</a>
-    <a class="cta" href="#book">Book a call</a>
-  </div>
-</div></header>
 
-<section class="hero"><div class="wrap">
-  <h1>Get your <span class="g">time back.</span> Let an AI coworker run the busywork.</h1>
-  <p class="sub">  Otira plugs into the tools you already use — your email, accounting, and inventory
-  software — learns how your business actually runs, and does the slow, repetitive work for you.
-  You review and approve. No new system to learn.</p>
-  <a class="btn" href="#book">Book a call</a>
-  <a class="btn ghost" href="#how">See how it works</a>
-</div></section>
+<div class="announce-bar" hidden>
+  <span class="new-badge">New</span>
+  Otira Agent MCP — bring trusted finance data to Claude, ChatGPT, and Cursor.
+  <a href="#ai">Learn more →</a>
+</div>
 
-<section class="stats"><div class="wrap">
-  <div class="statgrid">
-    <div class="stat"><div class="num">Weeks</div><div class="lbl">to live on your real data — not months</div></div>
-    <div class="stat"><div class="num">&lt;20 hrs</div><div class="lbl">of your team's time to get started</div></div>
-    <div class="stat"><div class="num">Every action</div><div class="lbl">logged, with your approval before it counts</div></div>
-  </div>
-</div></section>
-
-<section id="how"><div class="wrap">
-  <h2>How it works</h2>
-  <p class="lead">We set it up around you in a few weeks, prove it on your real data, then hand
-  you the keys. You stay in control the whole way.</p>
-  <div class="grid g3">
-    <div class="card"><div class="n">01</div><h3>We learn your business</h3><p>We sit with you and map how work really flows — your products, customers, pricing, and rules.</p></div>
-    <div class="card"><div class="n">02</div><h3>We connect your tools</h3><p>Email, accounting, inventory — Otira works on top of what you already have. Nothing to migrate.</p></div>
-    <div class="card"><div class="n">03</div><h3>It does the work</h3><p>Otira handles the repetitive tasks and shows you a result to approve. It tells you how sure it is and logs everything.</p></div>
-  </div>
-</div></section>
-
-<section id="uses"><div class="wrap">
-  <h2>What it can do</h2>
-  <p class="lead">Start with the one task costing you the most. Expand from there.</p>
-  <div class="grid g2">
-    <div class="card"><h3>Turn emails into orders</h3><p>A customer emails an order → Otira reads it, matches products and pricing, checks stock, and prepares the order for your approval.</p></div>
-    <div class="card"><h3>Handle invoices</h3><p>Vendor invoices get filed correctly and queued for payment with your okay — no more manual data entry.</p></div>
-    <div class="card"><h3>Keep inventory on track</h3><p>Reorder suggestions and purchase orders, with stock and costs tracked across locations.</p></div>
-    <div class="card"><h3>Watch the numbers</h3><p>Live dashboards plus alerts when something looks off — before it becomes a problem.</p></div>
-  </div>
-</div></section>
-
-<section id="works"><div class="wrap">
-  <span class="eyebrow">Works where your business already runs</span>
-  <h2>No migration. Nothing new to learn.</h2>
-  <p class="lead">Otira sits on top of the tools you already use — so you keep your systems and your way of working.</p>
-  <div class="logos">
-    <span class="tag">Gmail &amp; Outlook</span>
-    <span class="tag">QuickBooks</span>
-    <span class="tag">Excel &amp; Google Sheets</span>
-    <span class="tag">Your ERP (Traverse, NetSuite, and more)</span>
-    <span class="tag">Inventory &amp; ordering</span>
-    <span class="tag">Customer &amp; vendor portals</span>
-    <span class="tag">Slack</span>
-  </div>
-</div></section>
-
-<section id="trust"><div class="wrap">
-  <h2>Built so you can trust it</h2>
-  <p class="lead">Otira is a coworker, not a black box. You're always in control.</p>
-  <div class="grid g2">
-    <div><ul class="check">
-      <li>It tells you how confident it is on every task</li>
-      <li>It asks for approval before anything important</li>
-      <li>Every action is logged — see exactly what it did and why</li>
-      <li>Your data stays in your systems</li>
-    </ul></div>
-    <div class="card">
-      <h3>Why not just use ChatGPT?</h3>
-      <ul class="x" style="margin-top:12px">
-        <li>It isn't connected to your live systems</li>
-        <li>It doesn't know your business's rules</li>
-        <li>It can't take real actions for you</li>
-        <li>It can't show where every answer came from</li>
-      </ul>
-      <p style="color:var(--ink);margin-top:6px"><b>Otira does all four.</b></p>
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="logo-mark" aria-hidden="true">O</span>Otira</div>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#uses">Use cases</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#trust">Trust</a>
+      <a href="#architecture">How it works</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#book">Book a demo</a>
     </div>
   </div>
-  <div class="logos" style="margin-top:26px">
-    <span class="tag">Your data never leaves your systems</span>
-    <span class="tag">We never train on your data</span>
-    <span class="tag">Role-based access</span>
-    <span class="tag">Full audit log of every action</span>
-    <span class="tag">We test alongside you before anything goes live</span>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1>AI coworkers for wine importers and distributors.</h1>
+      <p class="subhead">Otira learns how your wine business works, connects to the tools your team already uses, then turns orders, invoices, inventory, and reporting into approved work.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#book">Book a demo</a>
+        <a class="btn btn-secondary" href="#uses">See use cases</a>
+      </div>
+      <div class="rating-pill">
+        <span class="stars">Email</span>
+        <span><strong>Order desk, invoices, inventory, and reporting</strong></span>
+      </div>
+    </div>
+    <div class="mockup-wrap" aria-hidden="true">
+      <div class="mockup-chrome">
+        <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+        <span class="mockup-title">Otira Coworker · Today</span>
+      </div>
+      <div class="mockup-body">
+        <div class="task-composer">
+          <span>What should Otira handle next?</span>
+          <div class="task-plus">+</div>
+        </div>
+        <div class="task-list">
+          <div class="task-item">
+            <span class="task-check"></span>
+            <span>
+              <span class="task-title">Prepare order from Acme Bistro email</span>
+              <span class="task-note"><strong>Needs approval:</strong> matched 12 cases Barolo 2019, checked allocation and price list.</span>
+            </span>
+          </div>
+          <div class="task-item">
+            <span class="task-check"></span>
+            <span>
+              <span class="task-title">Code invoice from Piedmont supplier</span>
+              <span class="task-note">Matched vendor, PO, freight line, and due date in accounting.</span>
+            </span>
+          </div>
+          <div class="task-item">
+            <span class="task-check"></span>
+            <span>
+              <span class="task-title">Draft reorder for low-stock SKUs</span>
+              <span class="task-note"><span class="blue">FYI:</span> 4 fast-moving wines fall below two-week cover.</span>
+            </span>
+          </div>
+          <div class="task-item">
+            <span class="task-check active"></span>
+            <span>
+              <span class="task-title task-done">Send weekly sales and inventory recap</span>
+              <span class="task-note">Sent with source links from email, inventory, and QuickBooks.</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div></section>
+</section>
 
-<section id="faq"><div class="wrap">
-  <h2>Questions</h2>
-  <details><summary>Do I have to switch software?</summary><p>No. Otira works on top of the tools you already use. There's nothing to migrate.</p></details>
-  <details><summary>What if my data is messy?</summary><p>That's normal — and fine. Your data doesn't need to be clean to start; it just needs to exist. We work with what you have.</p></details>
-  <details><summary>Will it make mistakes with my money?</summary><p>You approve anything that matters, and every action is logged. We never move money automatically without your sign-off.</p></details>
-  <details><summary>How long until it's working?</summary><p>We start with one workflow and aim to have it working on your real data within a few weeks.</p></details>
-  <details><summary>What does it cost?</summary><p>Far less than a hire — we price against the work and the hours it saves you. We'll walk through it on a call.</p></details>
-</div></section>
+<section id="uses">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Use cases</span>
+      <h2>Give your business an AI coworker.</h2>
+      <p class="lead">Otira learns how your team works, connects to your tools, then prepares orders, invoices, inventory moves, and reports for approval.</p>
+    </div>
+    <div class="setup-grid">
+      <article class="setup-card">
+        <div class="setup-visual">
+          <div class="setup-icon">1</div>
+        </div>
+        <div class="setup-body">
+          <h3>Learns how you work</h3>
+          <p>Customers, wine names, vintages, allocations, pricing exceptions, approval rules, and the shortcuts your team uses every day.</p>
+        </div>
+      </article>
+      <article class="setup-card">
+        <div class="setup-visual">
+          <div class="setup-icon">2</div>
+        </div>
+        <div class="setup-body">
+          <h3>Connects to your tools</h3>
+          <p>Email, PDFs, spreadsheets, accounting, ERP, inventory files, and shared drives — without forcing a system migration.</p>
+        </div>
+      </article>
+      <article class="setup-card">
+        <div class="setup-visual">
+          <div class="setup-icon">3</div>
+        </div>
+        <div class="setup-body">
+          <h3>Then gets to work via email, Slack, or app</h3>
+          <p>Drafts the next action, cites the source, flags uncertainty, and waits for the right person to approve.</p>
+        </div>
+      </article>
+    </div>
+    <div class="use-grid">
+      <div class="use-card">
+        <span class="use-icon">✉</span>
+        <h3>Turn emails into orders</h3>
+        <p>A customer emails an order. Otira reads it, matches wine names, vintages, products, pricing, and stock, then prepares the order for approval.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <span class="use-icon">$</span>
+        <h3>Handle vendor invoices</h3>
+        <p>Vendor invoices are captured, coded, matched to vendors or purchase orders, and queued for payment once you approve.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <span class="use-icon">↻</span>
+        <h3>Keep inventory on track</h3>
+        <p>Otira watches cases, costs, vintages, and locations, then suggests reorders or drafts purchase orders before stock runs low.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <span class="use-icon">↗</span>
+        <h3>Watch the numbers</h3>
+        <p>Live views and alerts flag margin, cash, inventory, or sales changes before they become bigger problems.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-<section id="book" class="cta-band"><div class="wrap">
-  <h2>See what Otira could do for your business</h2>
-  <p class="lead" style="margin:0 auto 28px">A short call to find the one workflow where Otira saves you the most — and get your time back.</p>
-  <a class="btn" href="mailto:hello@otira.example?subject=Otira%20intro%20call">Book a call</a>
-</div></section>
+<section id="architecture-old" class="arch-section" hidden>
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:40px;">
+      <span class="label-caps">How it works</span>
+      <h2>Learns how you work. Connects to your tools. Then gets to work.</h2>
+      <p class="lead" style="margin-bottom:0;">Generic AI does not know your vintages, allocations, customer pricing, or warehouse reality. Otira learns those rules, checks the source systems, and prepares work for approval.</p>
+    </div>
+    <div class="arch-diagram" role="img" aria-label="Otira workflow: business inputs on top, company rules in the middle, existing systems below">
+      <div class="arch-layer">
+        <div class="arch-layer-label">Daily<br>work</div>
+        <div class="arch-layer-body">
+          <div class="arch-row">
+            <div class="arch-box">
+              <div class="arch-box-title">Customer orders</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Email</span>
+                <span class="arch-icon">PDF</span>
+                <span class="arch-icon">EDI</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Vendor invoices</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Bills</span>
+                <span class="arch-icon">POs</span>
+                <span class="arch-icon">Terms</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Inventory moves</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Stock</span>
+                <span class="arch-icon">Cases</span>
+                <span class="arch-icon">Costs</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Team questions</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Slack</span>
+                <span class="arch-icon">Excel</span>
+                <span class="arch-icon">Email</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<footer><div class="wrap" style="display:flex;justify-content:space-between;width:100%">
-  <span class="logo"><b>Otira</b></span>
-  <span>AI coworkers for small businesses · © 2026 Otira</span>
-</div></footer>
+      <div class="arch-connectors" aria-hidden="true">
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+      </div>
+
+      <div class="arch-layer">
+        <div class="arch-layer-label highlight">Company<br>rules</div>
+        <div class="arch-layer-body arch-core-wrap">
+          <div class="arch-core-tabs" aria-hidden="true">
+            <span class="arch-core-tab">Products</span>
+            <span class="arch-core-tab">Customers</span>
+            <span class="arch-core-tab">Approvals</span>
+          </div>
+          <div class="arch-core">
+            <div class="arch-core-title">Otira <span>coworker</span></div>
+            <div class="arch-core-grid">
+              <div class="arch-core-cell">SKU and vintage map</div>
+              <div class="arch-core-cell">Trust &amp; approvals</div>
+              <div class="arch-core-cell">Pricing exceptions</div>
+              <div class="arch-core-cell">Inventory logic</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connectors" aria-hidden="true">
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+      </div>
+
+      <div class="arch-layer">
+        <div class="arch-layer-label">Your business<br>systems</div>
+        <div class="arch-layer-body">
+          <div class="arch-row">
+            <div class="arch-box">
+              <div class="arch-box-title">Accounting &amp; ERP</div>
+              <div class="arch-icons">
+                <span class="arch-icon">QBO</span>
+                <span class="arch-icon">Sage</span>
+                <span class="arch-icon">ERP</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Inventory</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Warehouse</span>
+                <span class="arch-icon">Sheets</span>
+                <span class="arch-icon">Lots</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Sales</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Email</span>
+                <span class="arch-icon">CRM</span>
+                <span class="arch-icon">Reps</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Files</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Drive</span>
+                <span class="arch-icon">Excel</span>
+                <span class="arch-icon">PDF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="logo-strip" hidden>
+  <div class="wrap">
+    <p class="logo-strip-label">Trusted by finance teams at</p>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-logo">Meridian Mfg</span>
+        <span class="marquee-logo">Atlas Distributing</span>
+        <span class="marquee-logo">Northline Health</span>
+        <span class="marquee-logo">Summit Retail</span>
+        <span class="marquee-logo">Clearwater Foods</span>
+        <span class="marquee-logo">Pioneer Logistics</span>
+        <span class="marquee-logo">Meridian Mfg</span>
+        <span class="marquee-logo">Atlas Distributing</span>
+        <span class="marquee-logo">Northline Health</span>
+        <span class="marquee-logo">Summit Retail</span>
+        <span class="marquee-logo">Clearwater Foods</span>
+        <span class="marquee-logo">Pioneer Logistics</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="value-section" id="workflow" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Workflow</span>
+      <h2>Give your business an AI coworker.</h2>
+      <p class="lead">Otira learns the way your team handles orders, invoices, inventory, and reports, then prepares the next step for approval.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-card">
+        <h3>Learns how you work</h3>
+        <p>Otira learns your customers, wine names, vintages, allocations, pricing exceptions, approval rules, and the shortcuts your team uses every day.</p>
+      </div>
+      <div class="value-card">
+        <h3>Connects to your tools</h3>
+        <p>It works across email, PDFs, spreadsheets, QuickBooks or Sage, inventory files, and shared drives without forcing a new system migration.</p>
+      </div>
+      <div class="value-card">
+        <h3>Then gets to work</h3>
+        <p>It prepares orders, invoices, reorders, reports, and exception queues for approval so your lean team spends less time copying and checking.</p>
+      </div>
+    </div>
+    <div class="quote-featured">
+      <div class="quote-dark">
+        <blockquote>Start narrow: customer order emails become approved draft orders your team can review in minutes.</blockquote>
+        <cite><strong>First workflow</strong>Email to order · pricing · stock check · approval</cite>
+      </div>
+      <div class="cta-panel">
+        <h3>Then expand from the same context</h3>
+        <p>Once Otira knows your SKUs, customers, pricing, and approval rules, invoice handling, replenishment, and reporting become easier to add.</p>
+        <a class="btn btn-primary" href="#uses">See use cases</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="integrations-section" id="integrations">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Integrations</span>
+      <h2>Connects to the tools your team already lives in.</h2>
+      <p class="lead">Otira works across email, accounting, ERP, inventory, spreadsheets, and wine-specific systems so work can move without another copy-paste handoff.</p>
+    </div>
+    <div class="integration-cloud" aria-label="Example tools Otira can connect to">
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/sap/0FAAFF" alt="" loading="lazy" />
+        <div class="integration-name">SAP Business One</div>
+        <div class="integration-type">ERP &amp; accounting</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/quickbooks/2CA01C" alt="" loading="lazy" />
+        <div class="integration-name">QuickBooks</div>
+        <div class="integration-type">Accounting</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=osas.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">Traverse ERP</div>
+        <div class="integration-type">Distribution ERP</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/gmail/EA4335" alt="" loading="lazy" />
+        <div class="integration-name">Gmail</div>
+        <div class="integration-type">Order inbox</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">Microsoft 365</div>
+        <div class="integration-type">Outlook &amp; Excel</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=sevenfifty.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">SevenFifty</div>
+        <div class="integration-type">Wine sales data</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=winedirect.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">WineDirect</div>
+        <div class="integration-type">Commerce &amp; orders</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=commerce7.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">Commerce7</div>
+        <div class="integration-type">DTC commerce</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=shipcompliant.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">ShipCompliant</div>
+        <div class="integration-type">Compliance</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://www.google.com/s2/favicons?domain=goekos.com&sz=64" alt="" loading="lazy" />
+        <div class="integration-name">Ekos</div>
+        <div class="integration-type">Inventory &amp; production</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/sage/00D639" alt="" loading="lazy" />
+        <div class="integration-name">Sage</div>
+        <div class="integration-type">Accounting</div>
+      </div>
+      <div class="integration-tile">
+        <img class="integration-logo" src="https://cdn.simpleicons.org/googlesheets/34A853" alt="" loading="lazy" />
+        <div class="integration-name">Spreadsheets</div>
+        <div class="integration-type">Excel, Sheets, CSV</div>
+      </div>
+    </div>
+    <a class="integration-cta" href="#book">Map your first integration →</a>
+  </div>
+</section>
+
+<section id="platform" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Platform</span>
+      <h2>Otira is the agentic finance platform for high-performing teams.</h2>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-visual">Connect &amp; sync</div>
+        <h3>Connect together</h3>
+        <p>Bring ERP, spreadsheets, and AI into one workspace — SAP, QuickBooks, Sage, and 150+ connectors with no engineering queue.</p>
+        <a class="link-arrow" href="#works">Start connecting</a>
+      </div>
+      <div class="pillar">
+        <div class="pillar-visual">Consolidate</div>
+        <h3>Consolidate at scale</h3>
+        <p>Map accounts, store metrics, and transform raw data into definitions your team trusts — with AI handling the tedious cleaning.</p>
+        <a class="link-arrow" href="#platform">Start consolidating</a>
+      </div>
+      <div class="pillar">
+        <div class="pillar-visual">Analyze &amp; act</div>
+        <h3>Analyze for impact</h3>
+        <p>Turn every close into insight. Variance analysis, board packs, and approved write-backs — with guardrails finance teams need.</p>
+        <a class="link-arrow" href="#ai">Start analyzing</a>
+      </div>
+    </div>
+
+    <div class="platform-row">
+      <div class="platform-copy">
+        <span class="label-caps">Connect &amp; sync</span>
+        <h3>Build a single source of truth</h3>
+        <p>Connect SAP, QuickBooks, Sage, NetSuite, billing, and HRIS with no-code connectors that sync your cross-system data in real time.</p>
+        <p class="secondary">Eliminate reliance on engineering. No more waiting in queue for data teams to lend a hand.</p>
+        <div class="tag-row">
+          <span class="tag">SAP</span><span class="tag">QuickBooks</span><span class="tag">Sage</span><span class="tag">NetSuite</span><span class="tag">Stripe</span>
+        </div>
+      </div>
+      <div class="platform-visual">
+        <div class="hub">
+          <div class="hub-tiers">
+            <div class="hub-row">
+              <span class="hub-pill">SAP</span><span class="hub-pill">QuickBooks</span><span class="hub-pill">Sage</span><span class="hub-pill">NetSuite</span>
+            </div>
+            <div class="hub-row">
+              <span class="hub-pill">Excel</span><span class="hub-pill">Google Sheets</span><span class="hub-pill">Stripe</span><span class="hub-pill">Slack</span>
+            </div>
+            <div class="hub-line"></div>
+            <div class="hub-core">O</div>
+            <div class="hub-line"></div>
+            <div class="hub-row">
+              <span class="hub-pill">Income statement</span><span class="hub-pill">Headcount</span><span class="hub-pill">Cash flow</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="platform-row reverse">
+      <div class="platform-copy">
+        <span class="label-caps">Consolidate &amp; transform</span>
+        <h3>Transform raw data into ready-to-use data</h3>
+        <p>Map fields, combine tables, run calculations, and store metrics. Let AI tackle the most tedious cleaning — you keep the definitions.</p>
+        <div class="tag-row">
+          <span class="tag">AI mappings</span><span class="tag">Custom logic</span><span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="platform-visual">
+        <div class="ui-panel">
+          <div class="ui-panel-head"><span>NetSuite income statement</span><span style="color:var(--report-green)">● Live</span></div>
+          <div class="ui-panel-body">
+            <table class="ui-table">
+              <thead><tr><th>Account</th><th>Jan</th><th>Feb</th><th>MoM</th></tr></thead>
+              <tbody>
+                <tr><td>Revenue</td><td class="num">$2.1M</td><td class="num">$2.0M</td><td class="num neg">−3.1%</td></tr>
+                <tr><td>COGS</td><td class="num">$840K</td><td class="num">$858K</td><td class="num neg">+2.1%</td></tr>
+                <tr><td>Gross margin</td><td class="num">60.0%</td><td class="num">57.1%</td><td class="num neg">−2.9 pts</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="platform-row">
+      <div class="platform-copy">
+        <span class="label-caps">Automate &amp; analyze</span>
+        <h3>Supercharge Excel &amp; Google Sheets</h3>
+        <p>Keep your existing models. Bi-directional add-ins sync data in real time. AI Scan spots and explains variances in seconds.</p>
+        <div class="tag-row">
+          <span class="tag">Pivot tables</span><span class="tag">Custom functions</span><span class="tag">Otira Connect</span>
+        </div>
+      </div>
+      <div class="platform-visual">
+        <div class="ui-panel">
+          <div class="ui-panel-head"><span>Forecast model · Live sync</span><span>Analyze with AI</span></div>
+          <div class="ui-panel-body">
+            <table class="ui-table">
+              <thead><tr><th>Line item</th><th>Actual</th><th>Budget</th><th>Var</th></tr></thead>
+              <tbody>
+                <tr><td>SaaS revenue</td><td class="num">$1.4M</td><td class="num">$1.5M</td><td class="num neg">−6.7%</td></tr>
+                <tr><td>Services</td><td class="num">$620K</td><td class="num">$580K</td><td class="num pos">+6.9%</td></tr>
+                <tr><td>Total revenue</td><td class="num">$2.0M</td><td class="num">$2.1M</td><td class="num neg">−3.1%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="enterprise-card">
+      <div>
+        <h3>Enterprise &amp; multi-entity</h3>
+        <p>Advanced collaboration, security, and scale for finance teams running SAP, NetSuite, or multi-ERP environments.</p>
+      </div>
+      <a class="btn btn-secondary" href="mailto:hello@otira.example?subject=Otira%20Enterprise">Talk to sales →</a>
+    </div>
+  </div>
+</section>
+
+<section id="ai" class="ai-section" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Otira Intelligence</span>
+      <h2>From close to insight, faster.</h2>
+      <p class="lead">Otira's agentic AI works alongside your team — explaining variances, drafting flux, running analysis — with the guardrails enterprise finance needs.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="AI capabilities">
+      <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-connect" id="tab-btn-connect">Connect</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-analyze" id="tab-btn-analyze">Analyze</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-act" id="tab-btn-act">Act</button>
+    </div>
+    <div class="tab-panel active" role="tabpanel" id="tab-connect" aria-labelledby="tab-btn-connect">
+      <div>
+        <h3>Connect your stack in days, not months</h3>
+        <p>Sync SAP, QuickBooks, Sage, NetSuite, billing, and spreadsheets into one layer — no migration, no rip-and-replace.</p>
+        <a class="link-arrow" href="#works">Explore integrations</a>
+      </div>
+      <ul class="tab-list">
+        <li><span>150+ no-code ERP &amp; accounting connectors</span><a href="#works">→</a></li>
+        <li><span>Bi-directional Excel &amp; Google Sheets sync</span><a href="#platform">→</a></li>
+        <li><span>Otira Agent MCP for Claude &amp; ChatGPT</span><a href="#ai">→</a></li>
+        <li><span>Real-time bank feeds &amp; billing data</span><a href="#works">→</a></li>
+      </ul>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="tab-analyze" aria-labelledby="tab-btn-analyze" hidden>
+      <div>
+        <h3>Instantly understand every variance</h3>
+        <p>AI Scan spots what changed month over month and explains why — with drill-downs and citations to every underlying transaction.</p>
+        <a class="link-arrow" href="#uses">See variance analysis</a>
+      </div>
+      <ul class="tab-list">
+        <li><span>AI variance notes on income statement &amp; flux</span><a href="#uses">→</a></li>
+        <li><span>Segment, region, and driver drill-downs</span><a href="#uses">→</a></li>
+        <li><span>Ask Otira in Slack, Teams, or email</span><a href="#ai">→</a></li>
+        <li><span>Board-ready charts with live data</span><a href="#uses">→</a></li>
+      </ul>
+    </div>
+    <div class="tab-panel" role="tabpanel" id="tab-act" aria-labelledby="tab-btn-act" hidden>
+      <div>
+        <h3>Take action with human approval</h3>
+        <p>Queue journal entries, update forecasts, and respond to stakeholder asks — Otira prepares, you approve, every action is logged.</p>
+        <a class="link-arrow" href="#trust">See trust &amp; security</a>
+      </div>
+      <ul class="tab-list">
+        <li><span>Approved write-backs to QuickBooks &amp; Sage</span><a href="#trust">→</a></li>
+        <li><span>Automated close checklists &amp; reconciliations</span><a href="#uses">→</a></li>
+        <li><span>Full audit log of asks &amp; actions</span><a href="#trust">→</a></li>
+        <li><span>SOC 2 · encryption · no training on your data</span><a href="#trust">→</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="uses-old" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Use cases</span>
+      <h2>Start with the work your team already does by hand.</h2>
+      <p class="lead">Each workflow is designed for human approval first. Otira prepares the work, shows the source, and lets your team stay in control.</p>
+    </div>
+    <div class="use-grid">
+      <div class="use-card">
+        <h3>Turn emails into orders</h3>
+        <p>A customer emails an order. Otira reads it, matches wine names, vintages, products, pricing, and stock, then prepares the order for approval.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <h3>Handle vendor invoices</h3>
+        <p>Vendor invoices are captured, coded, matched to vendors or purchase orders, and queued for payment once you approve.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <h3>Keep inventory on track</h3>
+        <p>Otira watches cases, costs, vintages, and locations, then suggests reorders or drafts purchase orders before stock runs low.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <h3>Watch the numbers</h3>
+        <p>Live views and alerts flag margin, cash, inventory, or sales changes before they become bigger problems.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <h3>Answer team questions</h3>
+        <p>Sales, ops, and finance can ask about order status, stock availability, invoice history, or customer-specific pricing.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+      <div class="use-card">
+        <h3>Prepare weekly reports</h3>
+        <p>Sales, inventory, cash, and margin updates are drafted with source links so owners spend less time building status reports.</p>
+        <span class="use-link">Learn more</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="works" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Integrations</span>
+      <h2>150+ connectors. Your stack, connected.</h2>
+      <p class="lead">ERP, accounting, HRIS, CRM, databases, and spreadsheets — synced in real time.</p>
+    </div>
+    <div class="hub" style="padding: 56px 48px;">
+      <div class="hub-tiers">
+        <div class="hub-row">
+          <span class="hub-pill">SAP</span><span class="hub-pill">QuickBooks</span><span class="hub-pill">Sage</span><span class="hub-pill">NetSuite</span><span class="hub-pill">Xero</span><span class="hub-pill">Intacct</span>
+        </div>
+        <div class="hub-row">
+          <span class="hub-pill">Excel</span><span class="hub-pill">Google Sheets</span><span class="hub-pill">Stripe</span><span class="hub-pill">Ramp</span><span class="hub-pill">Rippling</span><span class="hub-pill">Greenhouse</span>
+        </div>
+        <div class="hub-row">
+          <span class="hub-pill">Snowflake</span><span class="hub-pill">BigQuery</span><span class="hub-pill">Salesforce</span><span class="hub-pill">HubSpot</span><span class="hub-pill">Looker</span><span class="hub-pill">CSV</span>
+        </div>
+        <div class="hub-line"></div>
+        <div class="hub-core">O</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Trust</span>
+      <h2>It prepares work. Your team approves it.</h2>
+      <p class="lead">Wine businesses run on trust. Otira is designed around source links, confidence, and human approval before anything important changes.</p>
+    </div>
+    <div class="trust-grid">
+      <ul class="check">
+        <li>Every draft cites the email, invoice, spreadsheet, or system it came from</li>
+        <li>Human approval before orders, payments, or purchase orders are created</li>
+        <li>Confidence scores and exception queues for ambiguous products or pricing</li>
+        <li>Your data stays in your existing tools; Otira works on top</li>
+      </ul>
+      <div class="trust-card">
+        <h3 style="margin-bottom:16px">Why not ChatGPT or a dashboard?</h3>
+        <p style="color:var(--ink-muted);font-size:15px;line-height:1.55;margin-bottom:8px">ChatGPT does not know your customer pricing, inventory, or approval rules. Dashboards show what happened, but do not turn an order email or invoice into approved work.</p>
+        <div class="soc-badge">
+          <div class="soc-icon">OK</div>
+          <span><strong>Approval-first automation</strong>Start with review queues; add automation only after the workflow earns trust.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture" class="arch-section">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:40px;">
+      <span class="label-caps">Architecture</span>
+      <h2>The coworker between daily work and your systems.</h2>
+      <p class="lead" style="margin-bottom:0;">Otira sits between messy business inputs and the tools that run your company, carrying your product, pricing, inventory, and approval rules into every action.</p>
+    </div>
+    <div class="arch-diagram" role="img" aria-label="Otira workflow: business inputs on top, company rules in the middle, existing systems below">
+      <div class="arch-layer">
+        <div class="arch-layer-label">Daily<br>work</div>
+        <div class="arch-layer-body">
+          <div class="arch-row">
+            <div class="arch-box">
+              <div class="arch-box-title">Customer orders</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Email</span>
+                <span class="arch-icon">PDF</span>
+                <span class="arch-icon">EDI</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Vendor invoices</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Bills</span>
+                <span class="arch-icon">POs</span>
+                <span class="arch-icon">Terms</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Inventory moves</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Stock</span>
+                <span class="arch-icon">Cases</span>
+                <span class="arch-icon">Costs</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Team questions</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Slack</span>
+                <span class="arch-icon">Excel</span>
+                <span class="arch-icon">Email</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connectors" aria-hidden="true">
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+      </div>
+
+      <div class="arch-layer">
+        <div class="arch-layer-label highlight">Company<br>rules</div>
+        <div class="arch-layer-body arch-core-wrap">
+          <div class="arch-core-tabs" aria-hidden="true">
+            <span class="arch-core-tab">Products</span>
+            <span class="arch-core-tab">Customers</span>
+            <span class="arch-core-tab">Approvals</span>
+          </div>
+          <div class="arch-core">
+            <div class="arch-core-title">Otira <span>coworker</span></div>
+            <div class="arch-core-grid">
+              <div class="arch-core-cell">SKU and vintage map</div>
+              <div class="arch-core-cell">Trust &amp; approvals</div>
+              <div class="arch-core-cell">Pricing exceptions</div>
+              <div class="arch-core-cell">Inventory logic</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connectors" aria-hidden="true">
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+        <div class="arch-connector"></div><div class="arch-connector"></div>
+      </div>
+
+      <div class="arch-layer">
+        <div class="arch-layer-label">Your business<br>systems</div>
+        <div class="arch-layer-body">
+          <div class="arch-row">
+            <div class="arch-box">
+              <div class="arch-box-title">Accounting &amp; ERP</div>
+              <div class="arch-icons">
+                <span class="arch-icon">QBO</span>
+                <span class="arch-icon">Sage</span>
+                <span class="arch-icon">ERP</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Inventory</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Warehouse</span>
+                <span class="arch-icon">Sheets</span>
+                <span class="arch-icon">Lots</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Sales</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Email</span>
+                <span class="arch-icon">CRM</span>
+                <span class="arch-icon">Reps</span>
+              </div>
+            </div>
+            <div class="arch-box">
+              <div class="arch-box-title">Files</div>
+              <div class="arch-icons">
+                <span class="arch-icon">Drive</span>
+                <span class="arch-icon">Excel</span>
+                <span class="arch-icon">PDF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="customers" class="testimonials" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">Real users, real results</span>
+      <h2>500+ finance teams move the needle with Otira.</h2>
+      <p class="lead">Don't just take our word for it — read what they have to say.</p>
+    </div>
+    <div class="metric-scroll">
+      <article class="metric-card">
+        <div class="metric-card-top">
+          <span class="metric-company">Atlas Distributing</span>
+        </div>
+        <div class="metric-stat">3 wks</div>
+        <div class="metric-label">to full quarter-end reporting on Otira</div>
+        <blockquote>“Implementing Otira was insanely fast. We did all of our quarter-end reporting less than three weeks after signing.”</blockquote>
+        <footer><div><strong>Chris B.</strong>VP of Finance</div><a class="link-arrow" href="#book">Read story</a></footer>
+      </article>
+      <article class="metric-card">
+        <div class="metric-card-top">
+          <span class="metric-company">Summit Retail</span>
+        </div>
+        <div class="metric-stat">67%</div>
+        <div class="metric-label">decrease in close-cycle dev tickets</div>
+        <blockquote>“Otira enabled us to move fast and iterate. Tasks that once took days now require a few hours.”</blockquote>
+        <footer><div><strong>Yazmi M.</strong>Strategic Finance</div><a class="link-arrow" href="#book">Read story</a></footer>
+      </article>
+      <article class="metric-card">
+        <div class="metric-card-top">
+          <span class="metric-company">Clearwater Foods</span>
+        </div>
+        <div class="metric-stat">$6M</div>
+        <div class="metric-label">in annual finance ops savings</div>
+        <blockquote>“We're saving upwards of $6 million a year — and reinvested those savings in optimization and localization.”</blockquote>
+        <footer><div><strong>Malcolm G.</strong>CIO</div><a class="link-arrow" href="#book">Read story</a></footer>
+      </article>
+      <article class="metric-card">
+        <div class="metric-card-top">
+          <span class="metric-company">Northline Health</span>
+        </div>
+        <div class="metric-stat">+1</div>
+        <div class="metric-label">analyst output without a new hire</div>
+        <blockquote>“Otira added the output of at least one analyst without hiring anyone — and by year end, it will be two.”</blockquote>
+        <footer><div><strong>Axel A.</strong>Sr. Director FP&amp;A</div><a class="link-arrow" href="#book">Read story</a></footer>
+      </article>
+      <article class="metric-card">
+        <div class="metric-card-top">
+          <span class="metric-company">Pioneer Logistics</span>
+        </div>
+        <div class="metric-stat">Same wk</div>
+        <div class="metric-label">up and running on live books</div>
+        <blockquote>“You weren't kidding — plug-and-play and you immediately play. We were up and running in the same week.”</blockquote>
+        <footer><div><strong>Connie H.</strong>Sr. Finance Manager</div><a class="link-arrow" href="#book">Read story</a></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="persona-section" hidden>
+  <div class="wrap">
+    <div class="persona-head">
+      <h2>Everything finance teams love about Otira</h2>
+      <div class="persona-tabs" role="tablist" aria-label="Finance personas">
+        <button class="persona-btn" role="tab" aria-selected="true" aria-controls="persona-controller" id="persona-btn-controller">Controllers</button>
+        <button class="persona-btn" role="tab" aria-selected="false" aria-controls="persona-fpa" id="persona-btn-fpa">FP&amp;A</button>
+        <button class="persona-btn" role="tab" aria-selected="false" aria-controls="persona-cfo" id="persona-btn-cfo">CFOs</button>
+      </div>
+    </div>
+    <div class="persona-panel active" role="tabpanel" id="persona-controller" aria-labelledby="persona-btn-controller">
+      <div class="bento">
+        <div class="bento-card wide">
+          <div class="bento-label">Close</div>
+          <h4>Put month-end on autopilot</h4>
+          <p>Reconcile, flag exceptions, and draft flux notes — with citations to every transaction in SAP, QuickBooks, or Sage.</p>
+          <a class="link-arrow" href="#uses">Automate close</a>
+        </div>
+        <div class="bento-card">
+          <div class="bento-label">Accuracy</div>
+          <h4>Every number cited</h4>
+          <p>Click-through to source. No black box.</p>
+          <a class="link-arrow" href="#trust">See trust</a>
+        </div>
+        <div class="bento-card">
+          <div class="bento-label">Control</div>
+          <h4>Approval before posting</h4>
+          <p>Nothing hits the ledger without sign-off.</p>
+          <a class="link-arrow" href="#trust">Learn more</a>
+        </div>
+        <div class="bento-card">
+          <div class="bento-label">Speed</div>
+          <h4>Days → hours on close</h4>
+          <p>Same team, faster cycle.</p>
+          <a class="link-arrow" href="#customers">Read stories</a>
+        </div>
+        <div class="bento-card wide">
+          <div class="bento-label">Integrations</div>
+          <h4>Works with your ERP today</h4>
+          <p>SAP · QuickBooks · Sage · NetSuite · Xero — no migration required.</p>
+          <a class="link-arrow" href="#works">View integrations</a>
+        </div>
+      </div>
+    </div>
+    <div class="persona-panel" role="tabpanel" id="persona-fpa" aria-labelledby="persona-btn-fpa" hidden>
+      <div class="bento">
+        <div class="bento-card wide">
+          <div class="bento-label">Variance</div>
+          <h4>Instant “why?” on every move</h4>
+          <p>AI variance analysis with segment drill-downs — margin, revenue, COGS, headcount — in seconds not days.</p>
+          <a class="link-arrow" href="#uses">Explore analysis</a>
+        </div>
+        <div class="bento-card">
+          <div class="bento-label">Models</div>
+          <h4>Keep your spreadsheets</h4>
+          <p>Live sync to Excel &amp; Sheets.</p>
+          <a class="link-arrow" href="#platform">See platform</a>
+        </div>
+        <div class="bento-card">
+          <div class="bento-label">Budget</div>
+          <h4>Collaborative planning</h4>
+          <p>Budget owners get answers in Slack.</p>
+          <a class="link-arrow" href="#uses">Learn more</a>
+        </div>
+        <div class="bento-card">
+          <div class="bento-label">Forecast</div>
+          <h4>Assumptions centralized</h4>
+          <p>Forecasts tied to live actuals.</p>
+          <a class="link-arrow" href="#uses">Learn more</a>
+        </div>
+        <div class="bento-card wide">
+          <div class="bento-label">Board</div>
+          <h4>Investor-ready in clicks</h4>
+          <p>Pull reports and presentations — always traceable to source systems.</p>
+          <a class="link-arrow" href="#uses">Board relations</a>
+        </div>
+      </div>
+    </div>
+    <div class="persona-panel" role="tabpanel" id="persona-cfo" aria-labelledby="persona-btn-cfo" hidden>
+      <div class="bento">
+        <div class="bento-card wide">
+          <div class="bento-label">ROI</div>
+          <h4>Multiply output without headcount</h4>
+          <p>Cleaner data, automated reporting, and strategic bandwidth — at less than the cost of another analyst.</p>
+          <a class="link-arrow" href="#book">Book a demo</a>
+        </div>
+        <div class="bento-card">
+          <div class="bento-label">Trust</div>
+          <h4>SOC 2 ready</h4>
+          <p>Audit trails on every action.</p>
+          <a class="link-arrow" href="#trust">Security</a>
+        </div>
+        <div class="bento-card">
+          <div class="bento-label">Speed</div>
+          <h4>Live in weeks</h4>
+          <p>Forward-deployed setup.</p>
+          <a class="link-arrow" href="#customers">Case studies</a>
+        </div>
+        <div class="bento-card">
+          <div class="bento-label">Stack</div>
+          <h4>No rip-and-replace</h4>
+          <p>Layer on SAP, QBO, Sage.</p>
+          <a class="link-arrow" href="#works">Integrations</a>
+        </div>
+        <div class="bento-card wide">
+          <div class="bento-label">Partnership</div>
+          <h4>Finance as strategic partner</h4>
+          <p>Move from gatekeeper to trusted advisor — insights in real time, not end-of-month.</p>
+          <a class="link-arrow" href="#customers">Read stories</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label-caps">FAQ</span>
+      <h2>Questions</h2>
+    </div>
+    <div class="faq-grid">
+      <details class="faq-row"><summary>Do we have to replace our accounting, ERP, inventory tools, or spreadsheets?</summary><p>No. Otira layers on top of the tools your team already uses. The goal is less copying and checking, not a painful system migration.</p></details>
+      <details class="faq-row"><summary>What workflow should we start with?</summary><p>Start with one workflow that costs hours every week. For most wine importers and distributors, the best first candidate is customer order emails into approved draft orders.</p></details>
+      <details class="faq-row"><summary>Will Otira create orders or payments without us?</summary><p>No. The first version is approval-first: Otira prepares the draft, cites the source, flags uncertainty, and waits for your team.</p></details>
+      <details class="faq-row"><summary>How long does setup take?</summary><p>We map the workflow, connect the key systems, and prove the first use case on real data before expanding. The goal is weeks, not a multi-quarter transformation.</p></details>
+      <details class="faq-row"><summary>Is this only for wine?</summary><p>Wine is the first focus because the workflow is messy and underserved: vintages, allocations, distributors, inventory, and relationship-driven orders. The same pattern can expand later.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="cta-dark">
+  <div class="wrap cta-dark-inner">
+    <h2>Start with one workflow your team does by hand.</h2>
+    <p class="lead">We will map the order, invoice, inventory, or reporting process that slows your wine business down and show where an approval-first coworker can help.</p>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="mailto:hello@otira.example?subject=Otira%20workflow%20mapping">Book a workflow mapping</a>
+      <a class="btn btn-secondary" href="#uses">Review use cases</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark" aria-hidden="true">O</span>Otira</div>
+        <p>AI coworkers for small wine importers and distributors. Turn messy back-office work into approved actions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="#integrations">Integrations</a>
+        <a href="#architecture">How it works</a>
+        <a href="#trust">Trust</a>
+      </div>
+      <div class="footer-col">
+        <h4>Use cases</h4>
+        <a href="#uses">Emails to orders</a>
+        <a href="#uses">Vendor invoices</a>
+        <a href="#uses">Inventory tracking</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#book">Book a workflow mapping</a>
+        <a href="mailto:hello@otira.example">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Otira</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function initTabs(tabListSelector, panelClass) {
+    var tabs = document.querySelectorAll(tabListSelector + ' [role="tab"]');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var panelId = tab.getAttribute('aria-controls');
+        tabs.forEach(function (t) {
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.setAttribute('aria-selected', 'true');
+        document.querySelectorAll('.' + panelClass).forEach(function (p) {
+          var active = p.id === panelId;
+          p.classList.toggle('active', active);
+          p.hidden = !active;
+        });
+      });
+    });
+  }
+  initTabs('.tabs', 'tab-panel');
+  initTabs('.persona-tabs', 'persona-panel');
+
+  var hero = document.querySelector('.hero');
+  if (hero) {
+    hero.addEventListener('pointermove', function (event) {
+      var rect = hero.getBoundingClientRect();
+      var x = ((event.clientX - rect.left) / rect.width) * 100;
+      var y = ((event.clientY - rect.top) / rect.height) * 100;
+      hero.style.setProperty('--hero-dot-x', x + '%');
+      hero.style.setProperty('--hero-dot-y', y + '%');
+      hero.style.setProperty('--hero-dot-hover', '1');
+    });
+    hero.addEventListener('pointerleave', function () {
+      hero.style.setProperty('--hero-dot-hover', '0');
+    });
+  }
+})();
+</script>
+
 </body>
 </html>

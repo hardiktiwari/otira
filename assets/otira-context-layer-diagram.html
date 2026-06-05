@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Otira — Context Layer Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #111111;
+    --on-primary: #ffffff;
+    --ink-muted: #626260;
+    --ink-tertiary: #9c9fa5;
+    --canvas: #f5f1ec;
+    --surface-1: #ffffff;
+    --hairline: #d3cec6;
+    --hairline-soft: #ebe7e1;
+    --report-blue: #65b5ff;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+    --font: "Inter", ui-sans-serif, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--canvas);
+    color: var(--ink);
+    padding: 48px 32px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .header { text-align: center; max-width: 720px; margin-bottom: 40px; }
+  .header h1 { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .header p { font-size: 16px; color: var(--ink-muted); line-height: 1.55; }
+  .arch-diagram {
+    width: min(960px, 100%);
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-2xl);
+    padding: 40px 32px 36px;
+  }
+  .arch-layer {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    align-items: stretch;
+  }
+  .arch-layer + .arch-layer { margin-top: 28px; }
+  .arch-layer-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-tertiary);
+    padding-top: 18px;
+    line-height: 1.4;
+  }
+  .arch-layer-label.highlight { color: var(--report-blue); }
+  .arch-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .arch-box {
+    background: var(--surface-1);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-lg);
+    padding: 16px 14px 14px;
+    min-height: 112px;
+    display: flex;
+    flex-direction: column;
+  }
+  .arch-box-title {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .arch-icons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+  .arch-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 34px; height: 28px; padding: 0 8px;
+    background: var(--canvas);
+    border: 1px solid var(--hairline-soft);
+    border-radius: 6px;
+    font-size: 10px; font-weight: 600;
+    color: var(--ink-muted);
+  }
+  .arch-icon.otira { background: var(--ink); color: var(--on-primary); border-color: var(--ink); }
+  .arch-connectors {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    padding: 10px 0 6px;
+  }
+  .arch-connector { display: flex; justify-content: center; }
+  .arch-connector::before {
+    content: "";
+    width: 1px; height: 24px;
+    background: repeating-linear-gradient(to bottom, var(--hairline) 0 4px, transparent 4px 8px);
+  }
+  .arch-core-tabs {
+    display: flex; justify-content: center; gap: 8px;
+    margin-bottom: -1px; position: relative; z-index: 2;
+  }
+  .arch-core-tab {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-muted);
+    background: var(--surface-1);
+    border: 1px solid var(--hairline);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 6px 12px;
+  }
+  .arch-core {
+    border: 1.5px solid var(--report-blue);
+    border-radius: var(--radius-xl);
+    padding: 18px 16px 16px;
+  }
+  .arch-core-title {
+    text-align: center;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .arch-core-title span { color: var(--report-blue); }
+  .arch-core-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .arch-core-cell {
+    background: var(--canvas);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius-md);
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.35;
+    min-height: 64px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--ink-tertiary);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>The context layer for finance AI</h1>
+    <p>Adapted from the three-layer context model — customized for Otira's SMB finance coworker.</p>
+  </div>
+
+  <div class="arch-diagram" role="img" aria-label="Otira context layer architecture">
+    <div class="arch-layer">
+      <div class="arch-layer-label">Coworkers<br>&amp; interfaces</div>
+      <div class="arch-row">
+        <div class="arch-box">
+          <div class="arch-box-title">Finance workflows</div>
+          <div class="arch-icons">
+            <span class="arch-icon">Close</span><span class="arch-icon">Variance</span><span class="arch-icon">Flux</span>
+          </div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-box-title">Otira coworker</div>
+          <div class="arch-icons">
+            <span class="arch-icon otira">O</span><span class="arch-icon">Ask</span><span class="arch-icon">Act</span>
+          </div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-box-title">AI assistants</div>
+          <div class="arch-icons">
+            <span class="arch-icon">Claude</span><span class="arch-icon">ChatGPT</span><span class="arch-icon">Cursor</span>
+          </div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-box-title">Where you work</div>
+          <div class="arch-icons">
+            <span class="arch-icon">Slack</span><span class="arch-icon">Excel</span><span class="arch-icon">Email</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-connectors" aria-hidden="true">
+      <div class="arch-connector"></div><div class="arch-connector"></div>
+      <div class="arch-connector"></div><div class="arch-connector"></div>
+    </div>
+
+    <div class="arch-layer">
+      <div class="arch-layer-label highlight">Open &amp;<br>portable context</div>
+      <div>
+        <div class="arch-core-tabs" aria-hidden="true">
+          <span class="arch-core-tab">Context repo</span>
+          <span class="arch-core-tab">Context repo</span>
+          <span class="arch-core-tab">Context repo</span>
+        </div>
+        <div class="arch-core">
+          <div class="arch-core-title">Otira <span>context layer</span></div>
+          <div class="arch-core-grid">
+            <div class="arch-core-cell">Master data graph</div>
+            <div class="arch-core-cell">Trust &amp; approvals</div>
+            <div class="arch-core-cell">Rules &amp; definitions</div>
+            <div class="arch-core-cell">Close playbook</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-connectors" aria-hidden="true">
+      <div class="arch-connector"></div><div class="arch-connector"></div>
+      <div class="arch-connector"></div><div class="arch-connector"></div>
+    </div>
+
+    <div class="arch-layer">
+      <div class="arch-layer-label">Your business<br>systems</div>
+      <div class="arch-row">
+        <div class="arch-box">
+          <div class="arch-box-title">ERP &amp; accounting</div>
+          <div class="arch-icons">
+            <span class="arch-icon">SAP</span><span class="arch-icon">QBO</span>
+            <span class="arch-icon">Sage</span><span class="arch-icon">NetSuite</span>
+          </div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-box-title">Spreadsheets &amp; models</div>
+          <div class="arch-icons">
+            <span class="arch-icon">Excel</span><span class="arch-icon">Sheets</span><span class="arch-icon">Models</span>
+          </div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-box-title">Billing &amp; operations</div>
+          <div class="arch-icons">
+            <span class="arch-icon">Stripe</span><span class="arch-icon">Rippling</span><span class="arch-icon">CRM</span>
+          </div>
+        </div>
+        <div class="arch-box">
+          <div class="arch-box-title">Docs &amp; shared files</div>
+          <div class="arch-icons">
+            <span class="arch-icon">Drive</span><span class="arch-icon">SharePoint</span><span class="arch-icon">PDF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer">Otira · Layout inspired by enterprise context-layer models · Not affiliated with Atlan</p>
+</body>
+</html>
